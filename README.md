@@ -1,5 +1,5 @@
 # devs_simulator
-simulator using DEVS concept (generic simulator)
+simulator using DEVS (Discrete Event System Specification) concept (generic simulator)
 
 This maybe will be integrated as service in Chappy.
 
