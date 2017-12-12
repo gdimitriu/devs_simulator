@@ -19,18 +19,14 @@
  */
 package devs_simulator.internals.structure.interfaces;
 
-import java.util.List;
-
 /**
- * Interface for connection between two connect-able instances.
+ * Interface for running instance (this will receive the clock to run simulation).
  * @author Gabriel Dimitriu
  *
  */
-public interface IWire {
+public interface IRunningInstance {
 	
-	/** get the input connection points */
-	List<IPad> getInputPad();
-	
-	/** get the output connection points */
-	List<IPad> getOutputPad();
+	/** run one step at a time */
+	void run(final IClock clock);
+
 }

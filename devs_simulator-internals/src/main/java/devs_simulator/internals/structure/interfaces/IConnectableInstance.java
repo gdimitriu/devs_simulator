@@ -19,6 +19,8 @@
  */
 package devs_simulator.internals.structure.interfaces;
 
+import java.util.List;
+
 /**
  * Interface for the connect-able instances.
  * @author Gabriel Dimitriu
@@ -26,4 +28,9 @@ package devs_simulator.internals.structure.interfaces;
  */
 public interface IConnectableInstance {
 
+	/** get the list of input connection points (pad) */
+	List<IPad> getInputPads();
+	
+	/** get the list of output connection points (pad) */
+	List<IPad> getOutputPads();
 }

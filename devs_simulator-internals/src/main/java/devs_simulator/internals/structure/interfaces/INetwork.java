@@ -24,6 +24,6 @@ package devs_simulator.internals.structure.interfaces;
  * @author Gabriel Dimitriu
  *
  */
-public interface INetwork extends IConnectableInstance{
+public interface INetwork extends IConnectableInstance, IRunningInstance {
 
 }

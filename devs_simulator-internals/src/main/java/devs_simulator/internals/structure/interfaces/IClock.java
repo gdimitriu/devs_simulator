@@ -19,18 +19,23 @@
  */
 package devs_simulator.internals.structure.interfaces;
 
-import java.util.List;
+import java.time.LocalDateTime;
 
 /**
- * Interface for connection between two connect-able instances.
+ * Interface for the clock signal.
  * @author Gabriel Dimitriu
  *
  */
-public interface IWire {
+public interface IClock {
+
+	/** advance the clock with internal step */
+	void advance();
 	
-	/** get the input connection points */
-	List<IPad> getInputPad();
+	/** register the runner based on the visitor pattern */
+	void registerRunner(final IRunningInstance visitor);
 	
-	/** get the output connection points */
-	List<IPad> getOutputPad();
+	/** set the advancing clock in second */
+	void setAdvanceSecond(final long seconds);
+	
+	void setAdvance(final LocalDateTime advance);
 }

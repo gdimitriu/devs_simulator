@@ -25,6 +25,6 @@ package devs_simulator.internals.structure.interfaces;
  * @author Gabriel Dimitriu
  *
  */
-public interface IExternalSource extends IConnectableInstance {
+public interface IExternalSource extends IConnectableInstance, IRunningInstance {
 
 }
