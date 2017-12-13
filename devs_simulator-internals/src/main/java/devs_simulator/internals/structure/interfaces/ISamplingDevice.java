@@ -19,24 +19,13 @@
  */
 package devs_simulator.internals.structure.interfaces;
 
-import java.time.LocalDateTime;
-
 /**
- * Interface for the clock signal.
+ * This is interface for sampling device.
+ * This is used to inspect the connection points or wire.
+ * This could dump the information to a special device or store into internal memory.
  * @author Gabriel Dimitriu
  *
  */
-public interface IClock {
+public interface ISamplingDevice extends IConnectionPoint, IRunningInstance{
 
-	/** advance the clock with internal step */
-	void advance();
-	
-	/** register the runner based on the visitor pattern */
-	void registerRunner(final IRunningInstance visitor);
-	
-	/** set the advancing clock in second */
-	void setAdvanceSecond(final long seconds);
-	
-	/** set the advancing clock in date-time for slow system runs */
-	void setAdvance(final LocalDateTime advance);
 }

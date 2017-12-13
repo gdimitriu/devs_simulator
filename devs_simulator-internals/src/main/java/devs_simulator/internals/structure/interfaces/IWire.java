@@ -29,8 +29,8 @@ import java.util.List;
 public interface IWire {
 	
 	/** get the input connection points */
-	List<IPad> getInputPad();
+	List<IConnectionPoint> getInputConnectionPoints();
 	
 	/** get the output connection points */
-	List<IPad> getOutputPad();
+	List<IConnectionPoint> getOutputConnectionPoints();
 }

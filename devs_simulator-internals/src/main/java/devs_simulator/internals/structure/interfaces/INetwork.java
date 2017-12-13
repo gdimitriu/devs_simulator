@@ -19,6 +19,8 @@
  */
 package devs_simulator.internals.structure.interfaces;
 
+import java.util.List;
+
 /**
  * Interface for network (high level processing unit of DEVS) instances.
  * @author Gabriel Dimitriu
@@ -26,4 +28,44 @@ package devs_simulator.internals.structure.interfaces;
  */
 public interface INetwork extends IConnectableInstance, IRunningInstance {
 
+	/**
+	 *  add a connect-able instance to the network.
+	 *  The instance could be a network or a processor
+	 *  or something that implement the IConnectableInstance interface.
+	 *  @param instance the instance to be added.
+	 */
+	void addConnectable(final IConnectableInstance instance);
+	
+	/**
+	 * get the list of processors from this network.
+	 * @return list of processors from this network.
+	 */
+	List<IConnectableInstance> getProcessors();
+	
+	/**
+	 * get the list of subnetworks from this network. 
+	 * @return list of networks from this network.
+	 */
+	List<IConnectableInstance> getNetworks();
+	
+	/**
+	 * get the list of connect-able instances by type from this network.
+	 * @param type of the interface
+	 * @return list of connect-able instances
+	 */
+	List<IConnectableInstance> getConnectableByType(final Class<?> type);
+	
+	/**
+	 * add an already defined wire.
+	 * @param wire defined.
+	 */
+	void addWire(final IWire wire);
+	
+	/**
+	 * add a wire between two connection points.
+	 * @param inputID the ID of the input connection point.
+	 * @param outputID the ID of the output connection point.
+	 * @return the added wire.
+	 */
+	IWire addWire(final String inputID, final String outputID);
 }
