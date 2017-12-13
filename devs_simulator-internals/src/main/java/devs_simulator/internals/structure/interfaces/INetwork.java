@@ -49,13 +49,6 @@ public interface INetwork extends IConnectableInstance, IRunningInstance {
 	List<IConnectableInstance> getNetworks();
 	
 	/**
-	 * get the list of connect-able instances by type from this network.
-	 * @param type of the interface
-	 * @return list of connect-able instances
-	 */
-	List<IConnectableInstance> getConnectableByType(final Class<?> type);
-	
-	/**
 	 * add an already defined wire.
 	 * @param wire defined.
 	 */
