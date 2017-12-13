@@ -40,13 +40,13 @@ import devs_simulator.internals.structure.interfaces.IProcessor;
 @XmlAccessorType(XmlAccessType.FIELD)
 public abstract class Network extends BaseStructureConnectable implements INetwork {
 
-	/** list of the processors id which are in this instance */
-	@XmlElement(name = "processorIds")
-	private List<String> processorIds;
+	/** list of the processors id and type which are in this instance */
+	@XmlElement(name = "processors")
+	private List<InstanceHolder> processors;
 	
 	/** list of the networks id which are in this instance */
-	@XmlElement(name = "networkIds")
-	private List<String> networkIds;
+	@XmlElement(name = "networks")
+	private List<InstanceHolder> networks;
 	
 	@XmlElement(name = "inputIds")
 	private List<String> inputIds;
@@ -64,6 +64,7 @@ public abstract class Network extends BaseStructureConnectable implements INetwo
 	/** map of the subnetwork units by id */
 	@XmlTransient
 	private Map<String, INetwork> networkUnits = null;
+	
 	/**
 	 * 
 	 */
@@ -74,8 +75,8 @@ public abstract class Network extends BaseStructureConnectable implements INetwo
 	@Override
 	public List<IConnectableInstance> getProcessors() {
 		List<IConnectableInstance> returnData = new ArrayList<>();
-		for (String str : processorIds) {
-			returnData.add(processorUnits.get(str));
+		for (InstanceHolder instance : processors) {
+			returnData.add(processorUnits.get(instance.getId()));
 		}
 		return returnData;
 	}
@@ -83,8 +84,8 @@ public abstract class Network extends BaseStructureConnectable implements INetwo
 	@Override
 	public List<IConnectableInstance> getNetworks() {
 		List<IConnectableInstance> returnData = new ArrayList<>();
-		for (String str : networkIds) {
-			returnData.add(networkUnits.get(str));
+		for (InstanceHolder instance : networks) {
+			returnData.add(networkUnits.get(instance.getId()));
 		}
 		return returnData;
 	}
