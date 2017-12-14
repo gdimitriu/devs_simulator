@@ -17,33 +17,30 @@
     You should have received a copy of the GNU General Public License
     along with devs_simulator.  If not, see <http://www.gnu.org/licenses/>.
  */
-package devs_simulator.internals.configuration.xmldefinitions;
-
-import java.util.List;
+package devs_simulator.internals.configuration;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * Class for marshall/unmarshall a wire connection into xml configuration file.
+ * Class for marshall/unmarshall the root part of the devs_simulator configuration.
  * @author Gabriel Dimitriu
  *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class XmlWire {
-
-	/** list of input connection points */
-	@XmlElement(name = "inputs")
-	private List<XmlConnection> inputs;
+@XmlRootElement(name = "devs_simulator")
+public class XmlDevsSimulator {
 	
-	/** list of output connection points */
-	@XmlElement(name = "outputs")
-	private List<XmlConnection> outputs;
+	/** definitions of elements */
+	@XmlElement(name = "definitions")
+	private XmlDefinitions definitions;
+	
 	/**
 	 * 
 	 */
-	public XmlWire() {
+	public XmlDevsSimulator() {
 		// TODO Auto-generated constructor stub
 	}
 

@@ -1,36 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<root>
-	<network>
-		<instanceId>net0</instanceId>
-		<instanceType>network</instanceType>
-		<inputs>
-			<connectionPoint>
-				<instanceType>input</instanceType>
-				<position>0</position>
-			</connectionPoint>
-			<connectionPoint>
-				<instanceType>input</instanceType>
-				<position>1</position>
-			</connectionPoint>
-		</inputs>
-		<outputs>
-			<connectionPoint>
-				<instanceType>output</instanceType>
-				<position>2</position>
-			</connectionPoint>
-			<connectionPoint>
-				<instanceType>output</instanceType>
-				<position>3</position>
-			</connectionPoint>
-		</outputs>
+<devs_simulator>
+	<definitions>
 		<processors>
-			<processor type = "proc1">
-				<instanceId>p0</instanceId>
-			</processor>
 			<processor>
-				<instanceId>p1</instanceId>
-				<instanceType>proc2</instanceType>
-				<transition> ..1.. </transition>
+				<instanceId></instanceId>
+				<instanceType>proc1</instanceType>
+				<transition> ..0.. </transition>
 				<inputs>
 					<connectionPoint>
 						<instanceType>input</instanceType>
@@ -45,78 +20,107 @@
 				</outputs>
 			</processor>
 		</processors>
-		<connections>
-			<wire>
+		<networks>
+			<network>
+				<instanceId>net0</instanceId>
+				<instanceType>network</instanceType>
 				<inputs>
-					<connection>
+					<connectionPoint>
+						<instanceType>input</instanceType>
 						<position>0</position>
-					</connection>
-				</inputs>
-				<outputs>
-					<connection>
-						<instanceId>p0</instanceId>
-						<position>0</position>
-					</connection>		
-				</outputs>
-			</wire>
-			<wire>
-				<inputs>
-					<connection>
-						<instanceId>p0</instanceId>
+					</connectionPoint>
+					<connectionPoint>
+						<instanceType>input</instanceType>
 						<position>1</position>
-					</connection>
+					</connectionPoint>
 				</inputs>
 				<outputs>
-					<connection>
+					<connectionPoint>
+						<instanceType>output</instanceType>
 						<position>2</position>
-					</connection>
-				</outputs>
-			</wire>
-			<wire>
-				<inputs>
-					<connection>
-						<instanceId>p1</instanceId>
-						<position>1</position>
-					</connection>
-				</inputs>
-				<outputs>
-					<connection>
+					</connectionPoint>
+					<connectionPoint>
+						<instanceType>output</instanceType>
 						<position>3</position>
-					</connection>
+					</connectionPoint>
 				</outputs>
-			</wire>
-			<wire>
-				<inputs>
-					<connection>
-						<position>1</position>
-					</connection>
-				</inputs>
-				<outputs>
-					<connection>
-						<intanceId>p1</intanceId>
-						<position>0</position>
-					</connection>
-				</outputs>
-			</wire>
-		</connections>
-	</network>
-	<definitions>
-		<processor>
-			<instanceId></instanceId>
-			<instanceType>proc1</instanceType>
-			<transition> ..0.. </transition>
-			<inputs>
-				<connectionPoint>
-					<instanceType>input</instanceType>
-					<position>0</position>
-				</connectionPoint>
-			</inputs>
-			<outputs>
-				<connectionPoint>
-					<instanceType>output</instanceType>
-					<position>1</position>
-				</connectionPoint>
-			</outputs>
-		</processor>
+				<processors>
+					<processor type="proc1">
+						<instanceId>p0</instanceId>
+					</processor>
+					<processor>
+						<instanceId>p1</instanceId>
+						<instanceType>proc2</instanceType>
+						<transition> ..1.. </transition>
+						<inputs>
+							<connectionPoint>
+								<instanceType>input</instanceType>
+								<position>0</position>
+							</connectionPoint>
+						</inputs>
+						<outputs>
+							<connectionPoint>
+								<instanceType>output</instanceType>
+								<position>1</position>
+							</connectionPoint>
+						</outputs>
+					</processor>
+				</processors>
+				<connections>
+					<wire>
+						<inputs>
+							<connection>
+								<position>0</position>
+							</connection>
+						</inputs>
+						<outputs>
+							<connection>
+								<instanceId>p0</instanceId>
+								<position>0</position>
+							</connection>
+						</outputs>
+					</wire>
+					<wire>
+						<inputs>
+							<connection>
+								<instanceId>p0</instanceId>
+								<position>1</position>
+							</connection>
+						</inputs>
+						<outputs>
+							<connection>
+								<position>2</position>
+							</connection>
+						</outputs>
+					</wire>
+					<wire>
+						<inputs>
+							<connection>
+								<instanceId>p1</instanceId>
+								<position>1</position>
+							</connection>
+						</inputs>
+						<outputs>
+							<connection>
+								<position>3</position>
+							</connection>
+						</outputs>
+					</wire>
+					<wire>
+						<inputs>
+							<connection>
+								<position>1</position>
+							</connection>
+						</inputs>
+						<outputs>
+							<connection>
+								<intanceId>p1</intanceId>
+								<position>0</position>
+							</connection>
+						</outputs>
+					</wire>
+				</connections>
+			</network>
+		</networks>
 	</definitions>
-</root>
+</devs_simulator>

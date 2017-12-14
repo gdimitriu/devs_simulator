@@ -17,33 +17,39 @@
     You should have received a copy of the GNU General Public License
     along with devs_simulator.  If not, see <http://www.gnu.org/licenses/>.
  */
-package devs_simulator.internals.configuration.xmldefinitions;
+package devs_simulator.internals.configuration;
 
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
+import devs_simulator.internals.configuration.xmldefinitions.XmlNetwork;
+import devs_simulator.internals.configuration.xmldefinitions.XmlProcessor;
 
 /**
- * Class for marshall/unmarshall a wire connection into xml configuration file.
+ * Class for marshall/unmarshall the definitions of processors and networks into xml configuration file.
  * @author Gabriel Dimitriu
  *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-public class XmlWire {
+@XmlRootElement(name = "definitions")
+public class XmlDefinitions {
 
-	/** list of input connection points */
-	@XmlElement(name = "inputs")
-	private List<XmlConnection> inputs;
+	/** list of definitions of processors */
+	@XmlElement(name = "processors")
+	private List<XmlProcessor> processorDefs;
 	
-	/** list of output connection points */
-	@XmlElement(name = "outputs")
-	private List<XmlConnection> outputs;
+	/** list of definitions of networks */
+	@XmlElement(name = "networks")
+	private List<XmlNetwork> networkDefs;
+	
 	/**
 	 * 
 	 */
-	public XmlWire() {
+	public XmlDefinitions() {
 		// TODO Auto-generated constructor stub
 	}
 
