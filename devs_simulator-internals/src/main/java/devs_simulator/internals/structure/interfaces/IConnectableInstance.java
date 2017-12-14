@@ -26,7 +26,7 @@ import java.util.List;
  * @author Gabriel Dimitriu
  *
  */
-public interface IConnectableInstance extends IBaseConnectableType {
+public interface IConnectableInstance {
 
 	/**
 	 * get the list of input connection points (pad)

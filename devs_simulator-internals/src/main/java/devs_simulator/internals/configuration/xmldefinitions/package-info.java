@@ -17,22 +17,10 @@
     You should have received a copy of the GNU General Public License
     along with devs_simulator.  If not, see <http://www.gnu.org/licenses/>.
  */
-package devs_simulator.internals.structure.defaults;
-
-import devs_simulator.internals.structure.interfaces.IProcessor;
-
 /**
- * Default (Abstract) implementation for the connection point.
+ * XML definitions implementations for the internal DEVS structure.
+ * Here are the definitions of the xml description.
  * @author Gabriel Dimitriu
  *
  */
-public abstract class ConnectionPoint extends BaseStructureInstanceable implements IProcessor{
-
-	/**
-	 * 
-	 */
-	public ConnectionPoint() {
-		// TODO Auto-generated constructor stub
-	}
-
-}
+package devs_simulator.internals.configuration.xmldefinitions;

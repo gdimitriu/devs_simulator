@@ -17,21 +17,35 @@
     You should have received a copy of the GNU General Public License
     along with devs_simulator.  If not, see <http://www.gnu.org/licenses/>.
  */
-package devs_simulator.internals.structure.defaults;
+package devs_simulator.internals.configuration.xmldefinitions;
 
-import devs_simulator.internals.structure.interfaces.IProcessor;
+import java.util.List;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * Default (Abstract) implementation for the connection point.
+ * Class for marshall/unmarshall a wire connection into xml configuration file.
  * @author Gabriel Dimitriu
  *
  */
-public abstract class ConnectionPoint extends BaseStructureInstanceable implements IProcessor{
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "wire")
+public class XmlWire {
 
+	/** list of input connection points */
+	@XmlElement(name = "inputs")
+	private List<XmlConnection> inputs;
+	
+	/** list of output connection points */
+	@XmlElement(name = "outputs")
+	private List<XmlConnection> outputs;
 	/**
 	 * 
 	 */
-	public ConnectionPoint() {
+	public XmlWire() {
 		// TODO Auto-generated constructor stub
 	}
 

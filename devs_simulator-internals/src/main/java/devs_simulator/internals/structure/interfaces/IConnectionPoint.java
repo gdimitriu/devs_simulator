@@ -25,7 +25,7 @@ package devs_simulator.internals.structure.interfaces;
  * @author Gabriel Dimitriu
  *
  */
-public interface IConnectionPoint extends IBaseConnectableType {
+public interface IConnectionPoint extends IBaseInstantiableType {
 
 	/**
 	 * Get the owner of this connection point(IConnectableInstance).

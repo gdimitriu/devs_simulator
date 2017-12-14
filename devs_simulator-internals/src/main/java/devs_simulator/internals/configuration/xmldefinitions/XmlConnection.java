@@ -17,10 +17,34 @@
     You should have received a copy of the GNU General Public License
     along with devs_simulator.  If not, see <http://www.gnu.org/licenses/>.
  */
+package devs_simulator.internals.configuration.xmldefinitions;
+
+import javax.xml.bind.annotation.XmlAccessType;
+import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
- * Loader implementations for the internal DEVS structure.
- * Here are the loaders which transform the xml description into real internal structure.
+ * Class for marshall/unmarshall a wire connection point into xml configuration file.
  * @author Gabriel Dimitriu
  *
  */
-package devs_simulator.internals.structure.xmlloaders;
+@XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "connection")
+public class XmlConnection {
+	
+	/** internal instance id (if is into a network) */
+	@XmlElement(name = "instanceId")
+	private String instanceId;
+	
+	/** instanceId of the connection point which is unique inside another instance of network or processor*/
+	@XmlElement(name = "position")
+	private String position;
+	/**
+	 * 
+	 */
+	public XmlConnection() {
+		// TODO Auto-generated constructor stub
+	}
+
+}

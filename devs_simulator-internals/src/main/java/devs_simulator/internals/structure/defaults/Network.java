@@ -20,73 +20,36 @@
 package devs_simulator.internals.structure.defaults;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-import javax.xml.bind.annotation.XmlTransient;
-
 import devs_simulator.internals.structure.interfaces.IConnectableInstance;
 import devs_simulator.internals.structure.interfaces.INetwork;
-import devs_simulator.internals.structure.interfaces.IProcessor;
+import devs_simulator.internals.structure.interfaces.IWire;
 
 /**
  * Default (Abstract) implementation for the network.
  * @author Gabriel Dimitriu
  *
  */
-@XmlAccessorType(XmlAccessType.FIELD)
 public abstract class Network extends BaseStructureConnectable implements INetwork {
 
-	/** list of the processors id and type which are in this instance */
-	@XmlElement(name = "processors")
-	private List<InstanceHolder> processors;
-	
-	/** list of the networks id which are in this instance */
-	@XmlElement(name = "networks")
-	private List<InstanceHolder> networks;
-	
-	@XmlElement(name = "inputIds")
-	private List<String> inputIds;
-	
-	@XmlElement(name = "outputIds")
-	private List<String> outputIds;
-	
-	/*------------------------------------------------------------
-	 * Internal storage which will not be part of xml description.
-	 *----------------------------------------------------------*/
 	/** map of processing units by id */
-	@XmlTransient
-	private Map<String, IProcessor> processorUnits = null;
+	private Map<String, IConnectableInstance> processorUnits = null;
 	
 	/** map of the subnetwork units by id */
-	@XmlTransient
-	private Map<String, INetwork> networkUnits = null;
+	private Map<String, IConnectableInstance> networkUnits = null;
+	
+	/** list of connections in this network */
+	private List<IWire> connections = null;
 	
 	/**
 	 * 
 	 */
 	public Network() {
-		// TODO Auto-generated constructor stub
-	}
-	
-	@Override
-	public List<IConnectableInstance> getProcessors() {
-		List<IConnectableInstance> returnData = new ArrayList<>();
-		for (InstanceHolder instance : processors) {
-			returnData.add(processorUnits.get(instance.getId()));
-		}
-		return returnData;
-	}
-	
-	@Override
-	public List<IConnectableInstance> getNetworks() {
-		List<IConnectableInstance> returnData = new ArrayList<>();
-		for (InstanceHolder instance : networks) {
-			returnData.add(networkUnits.get(instance.getId()));
-		}
-		return returnData;
+		connections = new ArrayList<>();
+		processorUnits = new HashMap<>();
+		networkUnits = new HashMap<>();
 	}
 }

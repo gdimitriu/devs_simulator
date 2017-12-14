@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<root>
+	<network>
+		<instanceId>net1:0</instanceId>
+		<instanceType>net1</instanceType>
+		<input>
+			<id>net1:0:0</id>
+			<type>pad</type>
+		</input>
+		<input>
+			<id>net1:0:1</id>
+			<type>pad</type>
+		</input>
+		<output>
+			<id>net1:0:2</id>
+			<type>pad</type>
+		</output>
+		<output>
+			<id>net1:0:3</id>
+			<type>pad</type>
+		</output>
+		<processor>
+			<id>net1:0:p0</id>
+			<id>proc1</id>
+		</processor>
+	</network>
+	<processor>
+		<instanceId></instanceId>
+		<instanceType>proc1</instanceType>
+		<transition> ... </transition>
+		<input>
+			<id>proc1:0:0</id>
+			<type>pad</type>
+		</input>
+		<output>
+			<id>proc1:0:1</id>
+			<type>pad</type>
+		</output>
+	</processor>
+	<connectionPoint>
+		<id></id>
+		<type>pad</type>
+		<owner>net1:0</owner>
+	</connectionPoint>
+</root>

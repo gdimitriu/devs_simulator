@@ -19,12 +19,6 @@
  */
 package devs_simulator.internals.structure.defaults;
 
-import java.util.List;
-
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-
 import devs_simulator.internals.structure.interfaces.IProcessor;
 
 /**
@@ -32,15 +26,8 @@ import devs_simulator.internals.structure.interfaces.IProcessor;
  * @author Gabriel Dimitriu
  *
  */
-@XmlAccessorType(XmlAccessType.FIELD)
-public abstract class Processor implements IProcessor {
+public abstract class Processor extends BaseStructureInstanceable implements IProcessor {
 
-	@XmlElement(name = "inputIds")
-	private List<String> inputIds;
-	
-	@XmlElement(name = "outputIds")
-	private List<String> outputIds;
-	
 	/**
 	 * 
 	 */

@@ -17,22 +17,38 @@
     You should have received a copy of the GNU General Public License
     along with devs_simulator.  If not, see <http://www.gnu.org/licenses/>.
  */
-package devs_simulator.internals.structure.defaults;
-
-import devs_simulator.internals.structure.interfaces.IProcessor;
+package devs_simulator.internals.structure.interfaces;
 
 /**
- * Default (Abstract) implementation for the connection point.
+ * This is the base for all connect-able or connection instance.
+ * This is the base interface for Connect-able instance (like processors and networks).
+ * This is the base interface for connection instance (IConnectionPoint).
  * @author Gabriel Dimitriu
  *
  */
-public abstract class ConnectionPoint extends BaseStructureInstanceable implements IProcessor{
+public interface IBaseInstantiableType {
 
 	/**
-	 * 
+	 * get the instance id which is unique.
+	 * @return unique id of the instance 
 	 */
-	public ConnectionPoint() {
-		// TODO Auto-generated constructor stub
-	}
+	String getInstanceId();
+	
+	/**
+	 * set the instance id which is unique. 
+	 * @param id the unique id of the instance
+	 */
+	void setInstanceId(final String id);
+	
+	/**
+	 * get the type name of the instance.
+	 * @return the type name of the instance (not unique)
+	 */
+	String getInstanceType();
 
+	/**
+	 * set the type name of the instance.
+	 * @param type the type name of the instance (not unique).
+	 */
+	void setInstanceType(final String type);
 }

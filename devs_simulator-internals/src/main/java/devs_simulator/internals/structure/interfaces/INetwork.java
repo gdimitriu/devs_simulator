@@ -26,7 +26,7 @@ import java.util.List;
  * @author Gabriel Dimitriu
  *
  */
-public interface INetwork extends IConnectableInstance, IRunningInstance {
+public interface INetwork extends IBaseInstantiableType, IConnectableInstance, IRunningInstance {
 
 	/**
 	 *  add a connect-able instance to the network.

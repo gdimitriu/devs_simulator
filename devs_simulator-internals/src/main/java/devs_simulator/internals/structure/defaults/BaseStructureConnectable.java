@@ -19,65 +19,20 @@
  */
 package devs_simulator.internals.structure.defaults;
 
-import javax.xml.bind.annotation.XmlAccessType;
-import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlElement;
-
-import devs_simulator.internals.structure.interfaces.IBaseConnectableType;
+import devs_simulator.internals.structure.interfaces.IConnectableInstance;
 
 /**
- * Default (Abstract) implementation for BaseConnectable Type.
- * This should be inherited by all connect-able instances.
+ * Default (Abstract) implementation for BaseConnectable and instance-able Type.
+ * This should be inherited by all connect-able instances
  * @author Gabriel Dimitriu
  *
  */
-@XmlAccessorType(XmlAccessType.FIELD)
-public abstract class BaseStructureConnectable implements IBaseConnectableType{
+public abstract class BaseStructureConnectable extends BaseStructureInstanceable implements IConnectableInstance{
 
-	/** the internal unique id of the instance */
-	@XmlElement(name = "instanceId")
-	private String instanceId;
-	
-	/** the type name of the instance */
-	@XmlElement(name = "instanceType")
-	private String instanceType;
-	
 	/**
 	 * 
 	 */
 	public BaseStructureConnectable() {
 		// TODO Auto-generated constructor stub
-	}
-	
-	/* (non-Javadoc)
-	 * @see devs_simulator.internals.structure.interfaces.IBaseConnectableType#setInstanceId(java.lang.String)
-	 */
-	@Override
-	public void setInstanceId(final String id) {
-		instanceId = id;
-	}
-
-	/* (non-Javadoc)
-	 * @see devs_simulator.internals.structure.interfaces.IBaseConnectableType#getInstanceId()
-	 */
-	@Override
-	public String getInstanceId() {
-		return instanceId;
-	}
-	
-	/* (non-Javadoc)
-	 * @see devs_simulator.internals.structure.interfaces.IBaseConnectableType#setInstanceType(java.lang.String)
-	 */
-	@Override
-	public void setInstanceType(final String type) {
-		instanceType = type;
-	}
-	
-	/* (non-Javadoc)
-	 * @see devs_simulator.internals.structure.interfaces.IBaseConnectableType#getInstanceType()
-	 */
-	@Override
-	public String getInstanceType() {
-		return instanceType;
 	}
 }
