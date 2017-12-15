@@ -33,41 +33,103 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "network")
-public class XmlNetwork {
+public class XmlNetwork extends XmlInstantiable {
 
-	/** instanceId unique name inside another instance of network*/
-	@XmlElement(name = "instanceId")
-	private String instanceId;
-	
-	/** instance type the defined type of this instance */
-	@XmlElement(name = "instanceType")
-	private String instanceType;
-	
 	/** list of input connections */
 	@XmlElement(name = "inputs")
-	List<XmlConnectionPoint> inputConnections;
+	private List<XmlConnectionPoint> inputConnections;
 	
 	/** list of output connections */
 	@XmlElement(name = "outputs")
-	List<XmlConnectionPoint> outputConnections;
+	private List<XmlConnectionPoint> outputConnections;
 	
 	/** list of processors in this network */
 	@XmlElement(name = "processors")
-	List<XmlProcessor> processors;
+	private List<XmlProcessor> processors;
 	
 	/** list of subnetworks in this network */
 	@XmlElement(name = "networks")
-	List<XmlNetwork> networks;
+	private List<XmlNetwork> networks;
 	
 	/** list of wire connection  in this network */ 
 	@XmlElement(name = "connections")
-	List<XmlWire> connections;
+	private List<XmlWire> connections;
 	
 	/**
 	 * 
 	 */
 	public XmlNetwork() {
 		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @return the inputConnections
+	 */
+	public List<XmlConnectionPoint> getInputConnections() {
+		return inputConnections;
+	}
+
+	/**
+	 * @param inputConnections the inputConnections to set
+	 */
+	public void setInputConnections(final List<XmlConnectionPoint> inputConnections) {
+		this.inputConnections = inputConnections;
+	}
+
+	/**
+	 * @return the outputConnections
+	 */
+	public List<XmlConnectionPoint> getOutputConnections() {
+		return outputConnections;
+	}
+
+	/**
+	 * @param outputConnections the outputConnections to set
+	 */
+	public void setOutputConnections(final List<XmlConnectionPoint> outputConnections) {
+		this.outputConnections = outputConnections;
+	}
+
+	/**
+	 * @return the processors
+	 */
+	public List<XmlProcessor> getProcessors() {
+		return processors;
+	}
+
+	/**
+	 * @param processors the processors to set
+	 */
+	public void setProcessors(final List<XmlProcessor> processors) {
+		this.processors = processors;
+	}
+
+	/**
+	 * @return the networks
+	 */
+	public List<XmlNetwork> getNetworks() {
+		return networks;
+	}
+
+	/**
+	 * @param networks the networks to set
+	 */
+	public void setNetworks(final List<XmlNetwork> networks) {
+		this.networks = networks;
+	}
+
+	/**
+	 * @return the connections
+	 */
+	public List<XmlWire> getConnections() {
+		return connections;
+	}
+
+	/**
+	 * @param connections the connections to set
+	 */
+	public void setConnections(final List<XmlWire> connections) {
+		this.connections = connections;
 	}
 
 }

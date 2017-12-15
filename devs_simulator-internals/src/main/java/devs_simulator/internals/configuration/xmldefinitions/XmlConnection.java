@@ -34,17 +34,41 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class XmlConnection {
 	
 	/** internal instance id (if is into a network) */
-	@XmlElement(name = "instanceId")
+	@XmlElement(name = "instanceId", required = false)
 	private String instanceId;
 	
 	/** instanceId of the connection point which is unique inside another instance of network or processor*/
-	@XmlElement(name = "position")
+	@XmlElement(name = "position", required = true)
 	private String position;
 	/**
 	 * 
 	 */
 	public XmlConnection() {
 		// TODO Auto-generated constructor stub
+	}
+	/**
+	 * @return the instanceId
+	 */
+	public String getInstanceId() {
+		return instanceId;
+	}
+	/**
+	 * @param instanceId the instanceId to set
+	 */
+	public void setInstanceId(final String instanceId) {
+		this.instanceId = instanceId;
+	}
+	/**
+	 * @return the position
+	 */
+	public String getPosition() {
+		return position;
+	}
+	/**
+	 * @param position the position to set
+	 */
+	public void setPosition(final String position) {
+		this.position = position;
 	}
 
 }

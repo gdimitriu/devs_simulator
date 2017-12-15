@@ -40,11 +40,40 @@ public class XmlWire {
 	/** list of output connection points */
 	@XmlElement(name = "outputs")
 	private List<XmlConnection> outputs;
+	
 	/**
 	 * 
 	 */
 	public XmlWire() {
 		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @return the inputs
+	 */
+	public List<XmlConnection> getInputs() {
+		return inputs;
+	}
+
+	/**
+	 * @param inputs the inputs to set
+	 */
+	public void setInputs(final List<XmlConnection> inputs) {
+		this.inputs = inputs;
+	}
+
+	/**
+	 * @return the outputs
+	 */
+	public List<XmlConnection> getOutputs() {
+		return outputs;
+	}
+
+	/**
+	 * @param outputs the outputs to set
+	 */
+	public void setOutputs(final List<XmlConnection> outputs) {
+		this.outputs = outputs;
 	}
 
 }

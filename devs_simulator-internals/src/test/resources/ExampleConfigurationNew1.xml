@@ -1,5 +1,63 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <devs_simulator>
+	<runner>
+		<ExternalSources>
+			<ExternalSource>
+				<instanceId>es0</instanceId>
+				<outputs>
+					<connectionPoint>
+						<instanceType>output</instanceType>
+						<position>0</position>
+					</connectionPoint>
+				</outputs>
+			</ExternalSource>
+			<ExternalSource>
+				<instanceId>es1</instanceId>
+				<outputs>
+					<connectionPoint>
+						<instanceType>output</instanceType>
+						<position>0</position>
+					</connectionPoint>
+				</outputs>
+			</ExternalSource>
+		</ExternalSources>
+		<SamplingDevices>
+			<SamplingDevice>
+				<instanceId>sd0</instanceId>
+				<inputs>
+					<connectionPoint>
+						<instanceType>input</instanceType>
+						<position>0</position>
+					</connectionPoint>
+				</inputs>
+			</SamplingDevice>
+			<SamplingDevice>
+				<instanceId>sd1</instanceId>
+				<inputs>
+					<connectionPoint>
+						<instanceType>input</instanceType>
+						<position>0</position>
+					</connectionPoint>
+				</inputs>
+			</SamplingDevice>
+		</SamplingDevices>
+		<connections>
+			<wire>
+				<inputs>
+					<connection>
+						<instanceId>es0</instanceId>
+						<position>0</position>
+					</connection>
+				</inputs>
+				<outputs>
+					<connection>
+						<instanceId>net0</instanceId>
+						<position>0</position>
+					</connection>
+				</outputs>
+			</wire>
+		</connections>
+	</runner>
 	<definitions>
 		<processors>
 			<processor>

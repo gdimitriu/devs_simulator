@@ -17,7 +17,9 @@
     You should have received a copy of the GNU General Public License
     along with devs_simulator.  If not, see <http://www.gnu.org/licenses/>.
  */
-package devs_simulator.internals.configuration;
+package devs_simulator.internals.configuration.xmldefinitions;
+
+import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
@@ -25,55 +27,34 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
- * Class for marshall/unmarshall the root part of the devs_simulator configuration.
+ * Class for marshall/unmarshall a sampling device into xml configuration file.
  * @author Gabriel Dimitriu
  *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
-@XmlRootElement(name = "devs_simulator")
-public class XmlDevsSimulator {
-	
-	/** runner for devs simulator */
-	@XmlElement(name = "runner")
-	private XmlRunner runner;
-	
-	/** definitions of elements */
-	@XmlElement(name = "definitions")
-	private XmlDefinitions definitions;
-	
+@XmlRootElement(name = "SamplingDevice")
+public class XmlSamplingDevice {
+
+	/** list of input connections */
+	@XmlElement(name = "inputs", required = true)
+	private List<XmlConnectionPoint> inputConnections;
 	/**
 	 * 
 	 */
-	public XmlDevsSimulator() {
+	public XmlSamplingDevice() {
 		// TODO Auto-generated constructor stub
 	}
-
 	/**
-	 * @return the runner
+	 * @return the inputConnections
 	 */
-	public XmlRunner getRunner() {
-		return runner;
+	public List<XmlConnectionPoint> getInputConnections() {
+		return inputConnections;
 	}
-
 	/**
-	 * @param runner the runner to set
+	 * @param inputConnections the inputConnections to set
 	 */
-	public void setRunner(final XmlRunner runner) {
-		this.runner = runner;
-	}
-
-	/**
-	 * @return the definitions
-	 */
-	public XmlDefinitions getDefinitions() {
-		return definitions;
-	}
-
-	/**
-	 * @param definitions the definitions to set
-	 */
-	public void setDefinitions(final XmlDefinitions definitions) {
-		this.definitions = definitions;
+	public void setInputConnections(final List<XmlConnectionPoint> inputConnections) {
+		this.inputConnections = inputConnections;
 	}
 
 }

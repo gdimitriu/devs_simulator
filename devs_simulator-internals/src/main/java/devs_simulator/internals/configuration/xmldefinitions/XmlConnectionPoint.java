@@ -31,14 +31,10 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "connectionPoint")
-public class XmlConnectionPoint {
+public class XmlConnectionPoint extends XmlInstantiable {
 
-	/** the type of the instance */
-	@XmlElement(name = "instanceType")
-	private String instanceType;
-	
 	/** position or name (unique inside parent instance) */
-	@XmlElement(name = "position")
+	@XmlElement(name = "position", required = true)
 	private String position;
 	
 	/**
@@ -46,6 +42,20 @@ public class XmlConnectionPoint {
 	 */
 	public XmlConnectionPoint() {
 		// TODO Auto-generated constructor stub
+	}
+
+	/**
+	 * @return the position
+	 */
+	public String getPosition() {
+		return position;
+	}
+
+	/**
+	 * @param position the position to set
+	 */
+	public void setPosition(final String position) {
+		this.position = position;
 	}
 
 }

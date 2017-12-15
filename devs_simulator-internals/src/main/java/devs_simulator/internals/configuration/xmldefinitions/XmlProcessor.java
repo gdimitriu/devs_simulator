@@ -34,27 +34,19 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "processor")
-public class XmlProcessor {
+public class XmlProcessor extends XmlInstantiable {
 
 	/** already defined type of this processor */
-	@XmlAttribute(name = "type")
+	@XmlAttribute(name = "type", required = false)
 	private String type;
-	
-	/** instanceId unique name inside another instance of network*/
-	@XmlElement(name = "instanceId")
-	private String instanceId;
-	
-	/** instance type the defined type of this instance */
-	@XmlElement(name = "instanceType")
-	private String instanceType;
-	
+		
 	/** list of input connections */
 	@XmlElement(name = "inputs")
-	List<XmlConnectionPoint> inputConnections;
+	private List<XmlConnectionPoint> inputConnections;
 	
 	/** list of output connections */
 	@XmlElement(name = "outputs")
-	List<XmlConnectionPoint> outputConnections;
+	private List<XmlConnectionPoint> outputConnections;
 	
 	
 	/**
@@ -62,6 +54,54 @@ public class XmlProcessor {
 	 */
 	public XmlProcessor() {
 		// TODO Auto-generated constructor stub
+	}
+
+
+	/**
+	 * @return the type
+	 */
+	public String getType() {
+		return type;
+	}
+
+
+	/**
+	 * @param type the type to set
+	 */
+	public void setType(final String type) {
+		this.type = type;
+	}
+
+
+	/**
+	 * @return the inputConnections
+	 */
+	public List<XmlConnectionPoint> getInputConnections() {
+		return inputConnections;
+	}
+
+
+	/**
+	 * @param inputConnections the inputConnections to set
+	 */
+	public void setInputConnections(final List<XmlConnectionPoint> inputConnections) {
+		this.inputConnections = inputConnections;
+	}
+
+
+	/**
+	 * @return the outputConnections
+	 */
+	public List<XmlConnectionPoint> getOutputConnections() {
+		return outputConnections;
+	}
+
+
+	/**
+	 * @param outputConnections the outputConnections to set
+	 */
+	public void setOutputConnections(final List<XmlConnectionPoint> outputConnections) {
+		this.outputConnections = outputConnections;
 	}
 
 }

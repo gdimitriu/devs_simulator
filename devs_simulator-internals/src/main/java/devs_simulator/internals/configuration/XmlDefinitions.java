@@ -53,4 +53,32 @@ public class XmlDefinitions {
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * @return the processorDefs
+	 */
+	public List<XmlProcessor> getProcessorDefs() {
+		return processorDefs;
+	}
+
+	/**
+	 * @param processorDefs the processorDefs to set
+	 */
+	public void setProcessorDefs(final List<XmlProcessor> processorDefs) {
+		this.processorDefs = processorDefs;
+	}
+
+	/**
+	 * @return the networkDefs
+	 */
+	public List<XmlNetwork> getNetworkDefs() {
+		return networkDefs;
+	}
+
+	/**
+	 * @param networkDefs the networkDefs to set
+	 */
+	public void setNetworkDefs(final List<XmlNetwork> networkDefs) {
+		this.networkDefs = networkDefs;
+	}
+
 }
