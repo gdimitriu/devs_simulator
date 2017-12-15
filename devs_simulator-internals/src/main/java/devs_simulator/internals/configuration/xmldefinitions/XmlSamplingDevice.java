@@ -24,6 +24,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -33,10 +34,11 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "SamplingDevice")
-public class XmlSamplingDevice {
+public class XmlSamplingDevice extends XmlInstantiable {
 
 	/** list of input connections */
-	@XmlElement(name = "inputs", required = true)
+	@XmlElementWrapper(name = "inputs")
+	@XmlElement(name = "connectionPoint", required = true)
 	private List<XmlConnectionPoint> inputConnections;
 	/**
 	 * 

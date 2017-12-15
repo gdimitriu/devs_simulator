@@ -24,6 +24,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import devs_simulator.internals.configuration.xmldefinitions.XmExternalSource;
@@ -38,22 +39,26 @@ import devs_simulator.internals.configuration.xmldefinitions.XmlWire;
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "runner")
 public class XmlRunner {
+	
 	/** list of external sources */
-	@XmlElement(name = "ExternalSources")
+	@XmlElementWrapper(name = "ExternalSources")
+	@XmlElement(name = "ExternalSource")
 	private List<XmExternalSource> externalSources;
 	
 	/** list of sampling devices */
-	@XmlElement(name = "SamplingDevices")
+	@XmlElementWrapper(name = "SamplingDevices")
+	@XmlElement(name = "SamplingDevice")
 	private List<XmlSamplingDevice> samplingDevices;
 	
-	/** list of wire connection in top level. */ 
-	@XmlElement(name = "connections")
+	/** list of wire connection in top level. */
+	@XmlElementWrapper(name = "connections")
+	@XmlElement(name = "wire")
 	private List<XmlWire> connections;
 	/**
 	 * 
 	 */
 	public XmlRunner() {
-		// TODO Auto-generated constructor stub
+		
 	}
 	/**
 	 * @return the externalSources

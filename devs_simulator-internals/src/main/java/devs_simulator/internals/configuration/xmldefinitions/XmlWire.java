@@ -24,6 +24,8 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
+import javax.xml.bind.annotation.XmlRootElement;
 
 /**
  * Class for marshall/unmarshall a wire connection into xml configuration file.
@@ -31,14 +33,17 @@ import javax.xml.bind.annotation.XmlElement;
  *
  */
 @XmlAccessorType(XmlAccessType.FIELD)
+@XmlRootElement(name = "wire")
 public class XmlWire {
 
 	/** list of input connection points */
-	@XmlElement(name = "inputs")
+	@XmlElementWrapper(name = "inputs")
+	@XmlElement(name = "connection")
 	private List<XmlConnection> inputs;
 	
 	/** list of output connection points */
-	@XmlElement(name = "outputs")
+	@XmlElementWrapper(name = "outputs")
+	@XmlElement(name = "connection")
 	private List<XmlConnection> outputs;
 	
 	/**

@@ -24,6 +24,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -36,7 +37,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class XmExternalSource extends XmlInstantiable {
 
 	/** list of output connections */
-	@XmlElement(name = "outputs", required = true)
+	@XmlElementWrapper(name = "outputs")
+	@XmlElement(name = "connectionPoint", required = true)
 	private List<XmlConnectionPoint> outputConnections;
 	
 	/**

@@ -24,6 +24,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 /**
@@ -36,23 +37,28 @@ import javax.xml.bind.annotation.XmlRootElement;
 public class XmlNetwork extends XmlInstantiable {
 
 	/** list of input connections */
-	@XmlElement(name = "inputs")
+	@XmlElementWrapper(name = "inputs")
+	@XmlElement(name = "connectionPoint")
 	private List<XmlConnectionPoint> inputConnections;
 	
 	/** list of output connections */
-	@XmlElement(name = "outputs")
+	@XmlElementWrapper(name = "outputs")
+	@XmlElement(name = "connectionPoint")
 	private List<XmlConnectionPoint> outputConnections;
 	
 	/** list of processors in this network */
-	@XmlElement(name = "processors")
+	@XmlElementWrapper(name = "processors")
+	@XmlElement(name = "processor")
 	private List<XmlProcessor> processors;
 	
 	/** list of subnetworks in this network */
-	@XmlElement(name = "networks")
+	@XmlElementWrapper(name = "networks")
+	@XmlElement(name = "network")
 	private List<XmlNetwork> networks;
 	
-	/** list of wire connection  in this network */ 
-	@XmlElement(name = "connections")
+	/** list of wire connection  in this network */
+	@XmlElementWrapper(name = "connections")
+	@XmlElement(name = "wire")
 	private List<XmlWire> connections;
 	
 	/**

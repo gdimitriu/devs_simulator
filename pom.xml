@@ -67,4 +67,12 @@
 	<modules>
 	<module>devs_simulator-internals</module>
 	</modules>
+	<dependencies>
+		<!-- https://mvnrepository.com/artifact/junit/junit -->
+		<dependency>
+			<groupId>junit</groupId>
+			<artifactId>junit</artifactId>
+			<version>4.8.1</version>
+		</dependency>
+	</dependencies>
 </project>

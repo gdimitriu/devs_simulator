@@ -4,6 +4,7 @@
 		<ExternalSources>
 			<ExternalSource>
 				<instanceId>es0</instanceId>
+				<instanceType>source</instanceType>
 				<outputs>
 					<connectionPoint>
 						<instanceType>output</instanceType>
@@ -13,6 +14,7 @@
 			</ExternalSource>
 			<ExternalSource>
 				<instanceId>es1</instanceId>
+				<instanceType>source</instanceType>
 				<outputs>
 					<connectionPoint>
 						<instanceType>output</instanceType>
@@ -24,6 +26,7 @@
 		<SamplingDevices>
 			<SamplingDevice>
 				<instanceId>sd0</instanceId>
+				<instanceType>device</instanceType>
 				<inputs>
 					<connectionPoint>
 						<instanceType>input</instanceType>
@@ -33,6 +36,7 @@
 			</SamplingDevice>
 			<SamplingDevice>
 				<instanceId>sd1</instanceId>
+				<instanceType>device</instanceType>
 				<inputs>
 					<connectionPoint>
 						<instanceType>input</instanceType>

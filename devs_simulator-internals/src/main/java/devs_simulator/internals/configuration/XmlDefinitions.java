@@ -24,6 +24,7 @@ import java.util.List;
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
 import javax.xml.bind.annotation.XmlElement;
+import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
 import devs_simulator.internals.configuration.xmldefinitions.XmlNetwork;
@@ -39,11 +40,13 @@ import devs_simulator.internals.configuration.xmldefinitions.XmlProcessor;
 public class XmlDefinitions {
 
 	/** list of definitions of processors */
-	@XmlElement(name = "processors")
+	@XmlElementWrapper(name = "processors")
+	@XmlElement(name = "processor")
 	private List<XmlProcessor> processorDefs;
 	
 	/** list of definitions of networks */
-	@XmlElement(name = "networks")
+	@XmlElementWrapper(name = "networks")
+	@XmlElement(name = "network")
 	private List<XmlNetwork> networkDefs;
 	
 	/**
