@@ -53,7 +53,7 @@ public class ConfigurationLoadTest {
 	}
 
 	@Test
-	public void testLoadBasicConfiguration() {
+	public void loadDefinitions() {
 		JAXBContext context = null;
 		try {
 			context = JAXBContext.newInstance(XmlDevsSimulator.class);
@@ -93,14 +93,43 @@ public class ConfigurationLoadTest {
 		for (int i = 0; i < connections.size(); i++) {
 			assertEquals("output position wrong", Integer.toString(nrOfInputs + i), connections.get(i).getPosition());
 		}
+	}
+	
+	@Test
+	public void loadRunner() {
+		JAXBContext context = null;
+		try {
+			context = JAXBContext.newInstance(XmlDevsSimulator.class);
+		} catch (JAXBException e) {
+			fail("failed to create context : " + e.getLocalizedMessage());
+		}
+		Unmarshaller unmarshaller = null;
+		try {
+			unmarshaller = context.createUnmarshaller();
+		} catch (JAXBException e) {
+			fail("failed to create unmarshaller: " + e.getLocalizedMessage());
+		}
+		
+		XmlDevsSimulator configSimulator = null;
+		try {
+			configSimulator = (XmlDevsSimulator) unmarshaller.unmarshal(this.getClass().getClassLoader().getResourceAsStream("ExampleConfigurationNew1.xml"));
+		} catch (JAXBException e) {
+			fail("failed to create configuration : " + e.getLocalizedMessage());
+		}
 		
 		XmlRunner runner = configSimulator.getRunner();
 		List<XmlExternalSource> externalSources = runner.getExternalSources();
 		assertEquals("nr of external sources", 2, externalSources.size());
-		
+		for (int i = 0; i < externalSources.size(); i++) {
+			assertEquals("type of external ", "source", externalSources.get(i).getInstanceType());
+			assertEquals("id for external source", "es" + i , externalSources.get(i).getInstanceId());
+		}
 		List<XmlSamplingDevice> samplingDevices = runner.getSamplingDevices();
 		assertEquals("nr of sampling devices", 2, samplingDevices.size());
-		
+		for(int i = 0; i <samplingDevices.size(); i++) {
+			assertEquals("type of sampling device ", "device", samplingDevices.get(i).getInstanceType());
+			assertEquals("id for sampling device", "sd" + i , samplingDevices.get(i).getInstanceId());
+		}
 		List<XmlWire> wires = runner.getConnections();
 		assertEquals("nr of connections in runner", 4 , wires.size());
 	}
