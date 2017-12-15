@@ -34,7 +34,7 @@ import javax.xml.bind.annotation.XmlRootElement;
  */
 @XmlAccessorType(XmlAccessType.FIELD)
 @XmlRootElement(name = "ExternalSource")
-public class XmExternalSource extends XmlInstantiable {
+public class XmlExternalSource extends XmlInstantiable {
 
 	/** list of output connections */
 	@XmlElementWrapper(name = "outputs")
@@ -44,7 +44,7 @@ public class XmExternalSource extends XmlInstantiable {
 	/**
 	 * 
 	 */
-	public XmExternalSource() {
+	public XmlExternalSource() {
 		// TODO Auto-generated constructor stub
 	}
 

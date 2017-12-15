@@ -19,7 +19,10 @@
  */
 package devs_simulator.tests.configuration;
 
+import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
+
+import java.util.List;
 
 import javax.xml.bind.JAXBContext;
 import javax.xml.bind.JAXBException;
@@ -27,10 +30,17 @@ import javax.xml.bind.Unmarshaller;
 
 import org.junit.Test;
 
+import devs_simulator.internals.configuration.XmlDefinitions;
 import devs_simulator.internals.configuration.XmlDevsSimulator;
+import devs_simulator.internals.configuration.XmlRunner;
+import devs_simulator.internals.configuration.xmldefinitions.XmlExternalSource;
+import devs_simulator.internals.configuration.xmldefinitions.XmlConnectionPoint;
+import devs_simulator.internals.configuration.xmldefinitions.XmlNetwork;
+import devs_simulator.internals.configuration.xmldefinitions.XmlSamplingDevice;
+import devs_simulator.internals.configuration.xmldefinitions.XmlWire;
 
 /**
- * @author gdimitriu
+ * @author Gabriel Dimitriu
  *
  */
 public class ConfigurationLoadTest {
@@ -62,8 +72,36 @@ public class ConfigurationLoadTest {
 			configSimulator = (XmlDevsSimulator) unmarshaller.unmarshal(this.getClass().getClassLoader().getResourceAsStream("ExampleConfigurationNew1.xml"));
 		} catch (JAXBException e) {
 			fail("failed to create configuration : " + e.getLocalizedMessage());
+		}		
+		XmlDefinitions definitions = configSimulator.getDefinitions();
+		List<XmlNetwork> networks = definitions.getNetworkDefs();
+		assertEquals("networks size",1, networks.size());
+		
+		XmlNetwork net = networks.get(0);
+		assertEquals("type of network","network", net.getInstanceType());
+		assertEquals("id of network","net0", net.getInstanceId());
+		
+		List<XmlConnectionPoint> connections = net.getInputConnections();
+		assertEquals("nr of input pads", 2, connections.size());
+		for (int i = 0; i < connections.size(); i++) {
+			assertEquals("input position wrong", Integer.toString(i), connections.get(i).getPosition());
 		}
-		configSimulator.getDefinitions();
-		configSimulator.getRunner();
+		int nrOfInputs = connections.size();
+		
+		connections = net.getOutputConnections();
+		assertEquals("nr of output pads", 2, connections.size());
+		for (int i = 0; i < connections.size(); i++) {
+			assertEquals("output position wrong", Integer.toString(nrOfInputs + i), connections.get(i).getPosition());
+		}
+		
+		XmlRunner runner = configSimulator.getRunner();
+		List<XmlExternalSource> externalSources = runner.getExternalSources();
+		assertEquals("nr of external sources", 2, externalSources.size());
+		
+		List<XmlSamplingDevice> samplingDevices = runner.getSamplingDevices();
+		assertEquals("nr of sampling devices", 2, samplingDevices.size());
+		
+		List<XmlWire> wires = runner.getConnections();
+		assertEquals("nr of connections in runner", 4 , wires.size());
 	}
 }

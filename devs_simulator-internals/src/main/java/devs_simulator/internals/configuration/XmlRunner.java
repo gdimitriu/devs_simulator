@@ -27,7 +27,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
-import devs_simulator.internals.configuration.xmldefinitions.XmExternalSource;
+import devs_simulator.internals.configuration.xmldefinitions.XmlExternalSource;
 import devs_simulator.internals.configuration.xmldefinitions.XmlSamplingDevice;
 import devs_simulator.internals.configuration.xmldefinitions.XmlWire;
 
@@ -43,7 +43,7 @@ public class XmlRunner {
 	/** list of external sources */
 	@XmlElementWrapper(name = "ExternalSources")
 	@XmlElement(name = "ExternalSource")
-	private List<XmExternalSource> externalSources;
+	private List<XmlExternalSource> externalSources;
 	
 	/** list of sampling devices */
 	@XmlElementWrapper(name = "SamplingDevices")
@@ -63,13 +63,13 @@ public class XmlRunner {
 	/**
 	 * @return the externalSources
 	 */
-	public List<XmExternalSource> getExternalSources() {
+	public List<XmlExternalSource> getExternalSources() {
 		return externalSources;
 	}
 	/**
 	 * @param externalSources the externalSources to set
 	 */
-	public void setExternalSources(final List<XmExternalSource> externalSources) {
+	public void setExternalSources(final List<XmlExternalSource> externalSources) {
 		this.externalSources = externalSources;
 	}
 	/**

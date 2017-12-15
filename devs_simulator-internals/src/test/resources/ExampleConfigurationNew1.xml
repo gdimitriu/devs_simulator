@@ -60,6 +60,48 @@
 					</connection>
 				</outputs>
 			</wire>
+			<wire>
+				<inputs>
+					<connection>
+						<instanceId>es1</instanceId>
+						<position>0</position>
+					</connection>
+				</inputs>
+				<outputs>
+					<connection>
+						<instanceId>net0</instanceId>
+						<position>1</position>
+					</connection>
+				</outputs>
+			</wire>
+			<wire>
+				<inputs>
+					<connection>
+						<instanceId>net0</instanceId>
+						<position>2</position>
+					</connection>
+				</inputs>
+				<outputs>
+					<connection>
+						<instanceId>sd0</instanceId>
+						<position>0</position>
+					</connection>
+				</outputs>
+			</wire>
+			<wire>
+				<inputs>
+					<connection>
+						<instanceId>net0</instanceId>
+						<position>2</position>
+					</connection>
+				</inputs>
+				<outputs>
+					<connection>
+						<instanceId>sd0</instanceId>
+						<position>0</position>
+					</connection>
+				</outputs>
+			</wire>
 		</connections>
 	</runner>
 	<definitions>
