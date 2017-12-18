@@ -22,6 +22,7 @@ package devs_simulator.tests.configuration;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.fail;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.JAXBContext;
@@ -69,7 +70,7 @@ public class ConfigurationLoadTest {
 		
 		XmlDevsSimulator configSimulator = null;
 		try {
-			configSimulator = (XmlDevsSimulator) unmarshaller.unmarshal(this.getClass().getClassLoader().getResourceAsStream("ExampleConfigurationNew1.xml"));
+			configSimulator = (XmlDevsSimulator) unmarshaller.unmarshal(this.getClass().getClassLoader().getResourceAsStream("DEVSConfigurationEx1.xml"));
 		} catch (JAXBException e) {
 			fail("failed to create configuration : " + e.getLocalizedMessage());
 		}		
@@ -112,7 +113,7 @@ public class ConfigurationLoadTest {
 		
 		XmlDevsSimulator configSimulator = null;
 		try {
-			configSimulator = (XmlDevsSimulator) unmarshaller.unmarshal(this.getClass().getClassLoader().getResourceAsStream("ExampleConfigurationNew1.xml"));
+			configSimulator = (XmlDevsSimulator) unmarshaller.unmarshal(this.getClass().getClassLoader().getResourceAsStream("DEVSConfigurationEx1.xml"));
 		} catch (JAXBException e) {
 			fail("failed to create configuration : " + e.getLocalizedMessage());
 		}
@@ -132,5 +133,42 @@ public class ConfigurationLoadTest {
 		}
 		List<XmlWire> wires = runner.getConnections();
 		assertEquals("nr of connections in runner", 4 , wires.size());
+		
+		List<String> inInstances = new ArrayList<>();
+		List<String> inPositions = new ArrayList<>();
+		List<String> outInstances = new ArrayList<>();
+		List<String> outPositions = new ArrayList<>();
+		inInstances.add("es0");
+		inPositions.add("0");
+		outInstances.add("net0");
+		outPositions.add("0");
+		TestUtils.validateXMLWire(wires.get(0), inInstances, inPositions, outInstances, outPositions);
+		inInstances.clear();
+		inInstances.add("es1");
+		inPositions.clear();
+		inPositions.add("0");
+		outInstances.clear();
+		outInstances.add("net0");
+		outPositions.clear();
+		outPositions.add("1");
+		TestUtils.validateXMLWire(wires.get(1), inInstances, inPositions, outInstances, outPositions);
+		inInstances.clear();
+		inInstances.add("net0");
+		inPositions.clear();		
+		inPositions.add("2");
+		outInstances.clear();
+		outInstances.add("sd0");
+		outPositions.clear();
+		outPositions.add("0");
+		TestUtils.validateXMLWire(wires.get(2), inInstances, inPositions, outInstances, outPositions);
+		inInstances.clear();
+		inInstances.add("net0");
+		inPositions.clear();		
+		inPositions.add("3");
+		outInstances.clear();
+		outInstances.add("sd1");
+		outPositions.clear();
+		outPositions.add("0");
+		TestUtils.validateXMLWire(wires.get(3), inInstances, inPositions, outInstances, outPositions);
 	}
 }

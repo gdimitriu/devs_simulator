@@ -92,12 +92,12 @@
 				<inputs>
 					<connection>
 						<instanceId>net0</instanceId>
-						<position>2</position>
+						<position>3</position>
 					</connection>
 				</inputs>
 				<outputs>
 					<connection>
-						<instanceId>sd0</instanceId>
+						<instanceId>sd1</instanceId>
 						<position>0</position>
 					</connection>
 				</outputs>
