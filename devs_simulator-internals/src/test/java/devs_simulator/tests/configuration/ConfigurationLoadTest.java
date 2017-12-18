@@ -20,6 +20,7 @@
 package devs_simulator.tests.configuration;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
 import java.util.ArrayList;
@@ -134,7 +135,7 @@ public class ConfigurationLoadTest {
 		
 		assertEquals("type id of proc by reference ","proc1", processors.get(0).getType());
 		assertEquals("id of first proc", "p0", processors.get(0).getInstanceId());
-		
+		assertNotNull("the proc with specied type is not defined", definitions.getProcessorDefByType(processors.get(0).getType()));
 		
 		List<String> inTypes = new ArrayList<>();
 		inTypes.add("input");
@@ -146,6 +147,7 @@ public class ConfigurationLoadTest {
 		List<String> outPositions = new ArrayList<>();
 		outPositions.add("1");
 		TestUtils.validateProcessor("second proc", processors.get(1), "p1", "proc2", inTypes, inPositions, outTypes, outPositions);
+		//TODO: validate wires
 	}
 	
 	/**
@@ -198,6 +200,7 @@ public class ConfigurationLoadTest {
 		outInstances.add("net0");
 		outPositions.add("0");
 		TestUtils.validateXMLWire(wires.get(0), inInstances, inPositions, outInstances, outPositions);
+		assertNotNull("top level network doesn't exist", configSimulator.getDefinitions().getNetworkById("net0"));
 		inInstances.clear();
 		inInstances.add("es1");
 		inPositions.clear();

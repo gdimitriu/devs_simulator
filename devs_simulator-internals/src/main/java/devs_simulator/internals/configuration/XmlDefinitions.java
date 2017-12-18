@@ -84,4 +84,46 @@ public class XmlDefinitions {
 		this.networkDefs = networkDefs;
 	}
 
+	/**
+	 * get a network specified by type.
+	 * @param type
+	 * @return the network definition.
+	 */
+	public XmlNetwork getNetworkDefByType(final String type) {
+		for (XmlNetwork net : networkDefs) {
+			if (type.equals(net.getInstanceType())) {
+				return net;
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * get the processor specified by type.
+	 * @param type
+	 * @return the processor definition.
+	 */
+	public XmlProcessor getProcessorDefByType(final String type) {
+		for (XmlProcessor proc : processorDefs) {
+			if (type.equals(proc.getInstanceType())) {
+				return proc;
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * get the network with a specific ID (this is used by the runner to get the top level network).
+	 * In definition only the top level network should have an Id.
+	 * @param id from the runner configuration.
+	 * @return the network from runner.
+	 */
+	public XmlNetwork getNetworkById(final String id) {
+		for (XmlNetwork net : networkDefs) {
+			if (id.equals(net.getInstanceId())) {
+				return net;
+			}
+		}
+		return null;
+	}
 }

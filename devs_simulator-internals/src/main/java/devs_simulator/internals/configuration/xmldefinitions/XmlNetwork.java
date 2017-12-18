@@ -138,4 +138,36 @@ public class XmlNetwork extends XmlInstantiable {
 		this.connections = connections;
 	}
 
+	/**
+	 * get an instance-able instance (network, processor, connection point) defined by id.
+	 * @param id of the instance (unique in this network instance).
+	 * @return the instance.
+	 */
+	public XmlInstantiable getInstanceById(final String id) {
+		//find the id in networks
+		for (XmlNetwork net : networks) {
+			if (id.equals(net.getInstanceId())) {
+				return net;
+			}
+		}
+		//find in processors
+		for (XmlProcessor proc : processors) {
+			if (id.equals(proc.getInstanceId())) {
+				return proc;
+			}
+		}
+		//find in input connection points
+		for (XmlConnectionPoint conn : inputConnections) {
+			if (id.equals(conn.getInstanceId())) {
+				return conn;
+			}
+		}
+		//find in output connection points
+		for (XmlConnectionPoint conn : outputConnections) {
+			if (id.equals(conn.getInstanceId())) {
+				return conn;
+			}
+		}
+		return null;
+	}
 }
