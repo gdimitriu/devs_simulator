@@ -23,6 +23,8 @@ import java.util.List;
 import static org.junit.Assert.assertEquals;
 
 import devs_simulator.internals.configuration.xmldefinitions.XmlConnection;
+import devs_simulator.internals.configuration.xmldefinitions.XmlConnectionPoint;
+import devs_simulator.internals.configuration.xmldefinitions.XmlProcessor;
 import devs_simulator.internals.configuration.xmldefinitions.XmlWire;
 
 /**
@@ -57,8 +59,8 @@ public final class TestUtils {
 		assertEquals("not the same size of inputs", inInstances.size(), inputs.size());
 		List<XmlConnection> outputs = actual.getOutputs();
 		assertEquals("not the same size of outputs", outInstances.size(), outputs.size());
-		ValidateListOfConnection(inputs, inInstances, inPositions);
-		ValidateListOfConnection(outputs, outInstances, outPositions);
+		validateListOfConnection(inputs, inInstances, inPositions);
+		validateListOfConnection(outputs, outInstances, outPositions);
 	}
 
 	/**
@@ -67,11 +69,53 @@ public final class TestUtils {
 	 * @param inInstances
 	 * @param inPosition
 	 */
-	private static void ValidateListOfConnection(final List<XmlConnection> inputs, final List<String> inInstances,
+	private static void validateListOfConnection(final List<XmlConnection> inputs, final List<String> inInstances,
 			final List<String> inPosition) {
 		for (int i = 0; i < inputs.size(); i++) {
 			assertEquals(inInstances.get(i), inputs.get(i).getInstanceId());
 			assertEquals(inPosition.get(i), inputs.get(i).getPosition());
 		}
+	}
+	
+	/**
+	 * Validate list of connection points
+	 * @param message
+	 * @param connections
+	 * @param instancesTypes
+	 * @param positions
+	 */
+	public static void validateListOfConnectionPoints(final String message, final List<XmlConnectionPoint> connections, 
+			final List<String> instancesTypes, final List<String> positions) {
+		assertEquals(message + " expected values does not agree ", instancesTypes.size(), positions.size());
+		assertEquals(message + " the connections does not have the same size as expected ", instancesTypes.size(), connections.size());
+		for (int i = 0; i < connections.size(); i++) {
+			assertEquals("instanceType does not match for " + message, instancesTypes.get(i), connections.get(i).getInstanceType());
+			assertEquals("instance position does not match for " + message, positions.get(i), connections.get(i).getPosition());
+		}
+	}
+	
+	/**
+	 * validate the processor xml definition.
+	 * @param message
+	 * @param processor
+	 * @param instanceId
+	 * @param instanceType
+	 * @param inTypes
+	 * @param inPositions
+	 * @param outTypes
+	 * @param outPositions
+	 */
+	public static void validateProcessor(final String message, final XmlProcessor processor,
+			final String instanceId, final String instanceType,
+			final List<String> inTypes, final List<String> inPositions,
+			final List<String> outTypes, final List<String> outPositions) {
+		assertEquals(message + " expected values for input does not agree ", inTypes.size(), inPositions.size());
+		assertEquals(message + " exepcted values for outptus does not agree ", outTypes.size(), outPositions.size());
+		assertEquals(message + " instanceId ", instanceId, processor.getInstanceId());
+		assertEquals(message + " instanceType ", instanceType, processor.getInstanceType());
+		assertEquals(message + " inputs size does not match ", inTypes.size(), processor.getInputConnections().size());
+		assertEquals(message + " output size does not match ", outTypes.size(), processor.getOutputConnections().size());
+		validateListOfConnectionPoints(message + " input ", processor.getInputConnections(), inTypes, inPositions);
+		validateListOfConnectionPoints(message + " output ", processor.getOutputConnections(), outTypes, outPositions);
 	}
 }

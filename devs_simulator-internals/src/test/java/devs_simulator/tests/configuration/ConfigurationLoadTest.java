@@ -37,10 +37,12 @@ import devs_simulator.internals.configuration.XmlRunner;
 import devs_simulator.internals.configuration.xmldefinitions.XmlExternalSource;
 import devs_simulator.internals.configuration.xmldefinitions.XmlConnectionPoint;
 import devs_simulator.internals.configuration.xmldefinitions.XmlNetwork;
+import devs_simulator.internals.configuration.xmldefinitions.XmlProcessor;
 import devs_simulator.internals.configuration.xmldefinitions.XmlSamplingDevice;
 import devs_simulator.internals.configuration.xmldefinitions.XmlWire;
 
 /**
+ * Validate the unmarshall of the devs configuration description.
  * @author Gabriel Dimitriu
  *
  */
@@ -53,6 +55,9 @@ public class ConfigurationLoadTest {
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * Validate the definition part of the DEVS description.
+	 */
 	@Test
 	public void loadDefinitions() {
 		JAXBContext context = null;
@@ -75,27 +80,77 @@ public class ConfigurationLoadTest {
 			fail("failed to create configuration : " + e.getLocalizedMessage());
 		}		
 		XmlDefinitions definitions = configSimulator.getDefinitions();
-		List<XmlNetwork> networks = definitions.getNetworkDefs();
-		assertEquals("networks size",1, networks.size());
 		
+		List<XmlNetwork> networks = definitions.getNetworkDefs();
+		assertEquals("networks size should be",1, networks.size());
 		XmlNetwork net = networks.get(0);
+		validateNetwork(net, definitions);
+		
+		List<XmlProcessor> processors = definitions.getProcessorDefs();
+		assertEquals("processor size should be ", 1, processors.size());
+		
+		List<String> inTypes = new ArrayList<>();
+		inTypes.add("input");
+		List<String> inPositions = new ArrayList<>();
+		inPositions.add("0");
+		
+		List<String> outTypes = new ArrayList<>();
+		outTypes.add("output");
+		List<String> outPositions = new ArrayList<>();
+		outPositions.add("1");
+		TestUtils.validateProcessor("proc definition", processors.get(0), "", "proc1", inTypes, inPositions, outTypes, outPositions);
+	}
+
+	/**
+	 * Validate the network example
+	 * @param networks
+	 * @param definitions 
+	 */
+	public void validateNetwork(final XmlNetwork net, final XmlDefinitions definitions) {
+		
 		assertEquals("type of network","network", net.getInstanceType());
 		assertEquals("id of network","net0", net.getInstanceId());
 		
 		List<XmlConnectionPoint> connections = net.getInputConnections();
-		assertEquals("nr of input pads", 2, connections.size());
-		for (int i = 0; i < connections.size(); i++) {
-			assertEquals("input position wrong", Integer.toString(i), connections.get(i).getPosition());
-		}
-		int nrOfInputs = connections.size();
+		List<String> instancesTypes = new ArrayList<>();
+		List<String> positions = new ArrayList<>();
+		instancesTypes.add("input");
+		instancesTypes.add("input");
+		positions.add("0");
+		positions.add("1");
+		TestUtils.validateListOfConnectionPoints("inputs", connections, instancesTypes, positions);
 		
 		connections = net.getOutputConnections();
-		assertEquals("nr of output pads", 2, connections.size());
-		for (int i = 0; i < connections.size(); i++) {
-			assertEquals("output position wrong", Integer.toString(nrOfInputs + i), connections.get(i).getPosition());
-		}
+		instancesTypes.clear();
+		instancesTypes.add("output");
+		instancesTypes.add("output");
+		positions.clear();
+		positions.add("2");
+		positions.add("3");
+		TestUtils.validateListOfConnectionPoints("outputs", connections, instancesTypes, positions);
+		
+		List<XmlProcessor> processors = net.getProcessors();
+		assertEquals("nr or proc from master network", 2, processors.size());
+		
+		assertEquals("type id of proc by reference ","proc1", processors.get(0).getType());
+		assertEquals("id of first proc", "p0", processors.get(0).getInstanceId());
+		
+		
+		List<String> inTypes = new ArrayList<>();
+		inTypes.add("input");
+		List<String> inPositions = new ArrayList<>();
+		inPositions.add("0");
+		
+		List<String> outTypes = new ArrayList<>();
+		outTypes.add("output");
+		List<String> outPositions = new ArrayList<>();
+		outPositions.add("1");
+		TestUtils.validateProcessor("second proc", processors.get(1), "p1", "proc2", inTypes, inPositions, outTypes, outPositions);
 	}
 	
+	/**
+	 * Validate the runner part of the DEVS description.
+	 */
 	@Test
 	public void loadRunner() {
 		JAXBContext context = null;
