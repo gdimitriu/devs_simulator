@@ -17,37 +17,12 @@
     You should have received a copy of the GNU General Public License
     along with devs_simulator.  If not, see <http://www.gnu.org/licenses/>.
  */
-package devs_simulator.internals.structure.defaults;
-
-import devs_simulator.internals.structure.interfaces.IClock;
-import devs_simulator.internals.structure.interfaces.IProcessor;
+package devs_simulator.internals.structure.interfaces;
 
 /**
- * Base implementation for the processor.
+ * This is the base interface for Connect-able and instance-able instance (like processors and networks).
  * @author Gabriel Dimitriu
- *
  */
-public class Processor extends BaseStructureConnectable implements IProcessor {
+public interface IConnectableAndInstanceable extends IConnectableInstance, IBaseInstantiableType {
 
-	/**
-	 * 
-	 */
-	public Processor() {
-		// TODO Auto-generated constructor stub
-	}
-	
-	/**
-	 * base instance-able constructor.
-	 * @param id
-	 * @param type
-	 */
-	public Processor(final String id, final String type) {
-		super(id,type);
-	}
-
-	@Override
-	public void run(IClock clock) {
-		// TODO Auto-generated method stub
-		
-	}
 }

@@ -26,15 +26,16 @@ import java.util.List;
  * @author Gabriel Dimitriu
  *
  */
-public interface INetwork extends IBaseInstantiableType, IConnectableInstance, IRunningInstance {
+public interface INetwork extends IConnectableAndInstanceable, IRunningInstance {
 
 	/**
 	 *  add a connect-able instance to the network.
 	 *  The instance could be a network or a processor
 	 *  or something that implement the IConnectableInstance interface.
 	 *  @param instance the instance to be added.
+	 * @throws Exception if the connectable could not be adedd or wrong type of connectable. 
 	 */
-	void addConnectable(final IConnectableInstance instance);
+	void addConnectable(final IConnectableAndInstanceable instance) throws Exception;
 	
 	/**
 	 * get the list of processors from this network.

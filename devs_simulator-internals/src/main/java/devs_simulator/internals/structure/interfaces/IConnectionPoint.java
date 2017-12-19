@@ -43,13 +43,13 @@ public interface IConnectionPoint extends IBaseInstantiableType {
 	 * set the position inside the connect-able instance. 
 	 * @param position of the connection point.
 	 */
-	void setPosition(final int position);
+	void setPosition(final String position);
 	
 	/**
 	 * get the position inside the connect-able instance.
 	 * @return the position of the connection point.
 	 */
-	int getPosition();
+	String getPosition();
 	
 	/**
 	 * set the size of the bus.

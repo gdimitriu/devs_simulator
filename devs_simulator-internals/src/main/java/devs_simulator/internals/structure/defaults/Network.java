@@ -24,8 +24,11 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import devs_simulator.internals.structure.interfaces.IClock;
+import devs_simulator.internals.structure.interfaces.IConnectableAndInstanceable;
 import devs_simulator.internals.structure.interfaces.IConnectableInstance;
 import devs_simulator.internals.structure.interfaces.INetwork;
+import devs_simulator.internals.structure.interfaces.IProcessor;
 import devs_simulator.internals.structure.interfaces.IWire;
 
 /**
@@ -33,7 +36,7 @@ import devs_simulator.internals.structure.interfaces.IWire;
  * @author Gabriel Dimitriu
  *
  */
-public abstract class Network extends BaseStructureConnectable implements INetwork {
+public class Network extends BaseStructureConnectable implements INetwork {
 
 	/** map of processing units by id */
 	private Map<String, IConnectableInstance> processorUnits = null;
@@ -51,5 +54,44 @@ public abstract class Network extends BaseStructureConnectable implements INetwo
 		connections = new ArrayList<>();
 		processorUnits = new HashMap<>();
 		networkUnits = new HashMap<>();
+	}
+	
+	@Override
+	public void addConnectable(final IConnectableAndInstanceable instance) throws Exception {
+		if (instance instanceof IProcessor) {
+			processorUnits.put(instance.getInstanceId(), instance);
+		} else if (instance instanceof INetwork) {
+			networkUnits.put(instance.getInstanceId(), instance);
+		}
+		throw new Exception("could not add "  + instance.getInstanceId() + " to the " + getInstanceId());
+	}
+
+	@Override
+	public void run(final IClock clock) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public List<IConnectableInstance> getProcessors() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public List<IConnectableInstance> getNetworks() {
+		// TODO Auto-generated method stub
+		return null;
+	}
+
+	@Override
+	public void addWire(final IWire wire) {
+		connections.add(wire);
+	}
+
+	@Override
+	public IWire addWire(final String inputID, final String outputID) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 }

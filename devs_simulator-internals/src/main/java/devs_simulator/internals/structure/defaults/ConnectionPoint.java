@@ -19,15 +19,23 @@
  */
 package devs_simulator.internals.structure.defaults;
 
-import devs_simulator.internals.structure.interfaces.IProcessor;
+import devs_simulator.internals.structure.interfaces.IClock;
+import devs_simulator.internals.structure.interfaces.IConnectableInstance;
+import devs_simulator.internals.structure.interfaces.IConnectionPoint;
+import devs_simulator.internals.structure.interfaces.IRunningInstance;
 
 /**
  * Default (Abstract) implementation for the connection point.
  * @author Gabriel Dimitriu
  *
  */
-public abstract class ConnectionPoint extends BaseStructureInstanceable implements IProcessor{
+public class ConnectionPoint extends BaseStructureInstanceable implements IRunningInstance, IConnectionPoint {
 
+	/** the position inside network or processor */
+	private String position ="0";
+	
+	/** the owner of this connection point. */
+	private IConnectableInstance owner = null;
 	/**
 	 * 
 	 */
@@ -35,4 +43,43 @@ public abstract class ConnectionPoint extends BaseStructureInstanceable implemen
 		// TODO Auto-generated constructor stub
 	}
 
+	/**
+	 * base instance-able constructor.
+	 * @param id 
+	 * @param type
+	 */
+	public ConnectionPoint(final String id, final String type, final String position) {
+		super(id,type);
+		this.position = position; 
+	}
+
+	/**
+	 * @return the position
+	 */
+	public String getPosition() {
+		return position;
+	}
+
+	/**
+	 * @param position the position to set
+	 */
+	public void setPosition(final String position) {
+		this.position = position;
+	}
+	
+	@Override
+	public void run(final IClock clock) {
+		// TODO Auto-generated method stub
+		
+	}
+
+	@Override
+	public IConnectableInstance getOwner() {
+		return owner;
+	}
+
+	@Override
+	public void setOwner(final IConnectableInstance owner) {
+		this.owner = owner;
+	}
 }

@@ -42,6 +42,16 @@ public abstract class BaseStructureInstanceable implements IBaseInstantiableType
 		// TODO Auto-generated constructor stub
 	}
 	
+	/**
+	 * base instance-able constructor.
+	 * @param id of the instance
+	 * @param type of instance
+	 */
+	public BaseStructureInstanceable(final String id, final String type) {
+		this.instanceId = id;
+		this.instanceType = type;
+	}
+	
 	/* (non-Javadoc)
 	 * @see devs_simulator.internals.structure.interfaces.IBaseInstantiableType#setInstanceId(java.lang.String)
 	 */
