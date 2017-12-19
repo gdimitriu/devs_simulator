@@ -21,6 +21,7 @@ package devs_simulator.internals.configuration.xmldefinitions;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
+import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlTransient;
 
@@ -42,12 +43,32 @@ public class XmlInstantiable {
 	@XmlElement(name = "instanceType", required = true)
 	private String instanceType;
 	
+	/** already defined type of this network/processor */
+	@XmlAttribute(name = "type", required = false)
+	private String type;
+	
 	/**
 	 * 
 	 */
 	public XmlInstantiable() {
 		// TODO Auto-generated constructor stub
 	}
+	
+	/**
+	 * @return the type
+	 */
+	public String getType() {
+		return type;
+	}
+
+
+	/**
+	 * @param type the type to set
+	 */
+	public void setType(final String type) {
+		this.type = type;
+	}
+
 
 	/**
 	 * @return the instanceId

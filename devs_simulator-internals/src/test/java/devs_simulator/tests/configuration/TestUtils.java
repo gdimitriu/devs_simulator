@@ -21,9 +21,13 @@ package devs_simulator.tests.configuration;
 
 import java.util.List;
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
+import devs_simulator.internals.configuration.XmlDefinitions;
 import devs_simulator.internals.configuration.xmldefinitions.XmlConnection;
 import devs_simulator.internals.configuration.xmldefinitions.XmlConnectionPoint;
+import devs_simulator.internals.configuration.xmldefinitions.XmlInstantiable;
+import devs_simulator.internals.configuration.xmldefinitions.XmlNetwork;
 import devs_simulator.internals.configuration.xmldefinitions.XmlProcessor;
 import devs_simulator.internals.configuration.xmldefinitions.XmlWire;
 
@@ -117,5 +121,61 @@ public final class TestUtils {
 		assertEquals(message + " output size does not match ", outTypes.size(), processor.getOutputConnections().size());
 		validateListOfConnectionPoints(message + " input ", processor.getInputConnections(), inTypes, inPositions);
 		validateListOfConnectionPoints(message + " output ", processor.getOutputConnections(), outTypes, outPositions);
+	}
+
+	/**
+	 * Validate the wires references and ports.
+	 * @param wires the wires to be checked.
+	 * @param net the network in which wires reside.
+	 * @param definitions from the definition section.
+	 */
+	public static void validateWiresReferences(final List<XmlWire> wires, final XmlNetwork net, final XmlDefinitions definitions) {
+		for (XmlWire wire : wires) {
+			validateWireRefereces(wire, net, definitions);
+		}		
+	}
+	
+	/**
+	 * Validate the wires references and ports.
+	 * @param wire the wire to be checked
+	 * @param net the network in which wires reside.
+	 * @param definitions from the definition section.
+	 */	
+	public static void validateWireRefereces(final XmlWire wire, final XmlNetwork net, final XmlDefinitions definitions) {
+		List<XmlConnection> connections = wire.getInputs();
+		for (XmlConnection connection : connections) {
+			validateConnectionReferences(connection, net, definitions);
+		}
+		connections = wire.getOutputs();
+		for (XmlConnection connection : connections) {
+			validateConnectionReferences(connection, net, definitions);
+		}
+	}
+	
+	/**
+	 * Validate the connection references and ports.
+	 * @param connection the connection from wire
+	 * @param net the network in which wires reside.
+	 * @param definitions from the definition section.
+	 */
+
+	private static void validateConnectionReferences(final XmlConnection connection, final XmlNetwork net, final XmlDefinitions definitions) {
+		if (connection.getInstanceId() != null && !connection.getInstanceId().isEmpty()) {
+			XmlInstantiable instance = net.getInstanceById(connection.getInstanceId());
+			assertNotNull("instance with the id " + connection.getInstanceId() + "doesn't exist", instance);
+			if (instance.getType() != null && !instance.getType().isEmpty()) {
+				instance = definitions.getInstanceDefByType(instance.getType());
+			}
+			if (instance instanceof XmlProcessor) {
+				instance = ((XmlProcessor) instance).getInstanceByPosition(connection.getPosition());
+				assertNotNull("processor " + connection.getInstanceId() + " with internal position " + connection.getPosition() + " doesn't exist", instance);
+			} else if (instance instanceof XmlNetwork) {
+				instance = ((XmlNetwork) instance).getInstanceByPosition(connection.getPosition());
+				assertNotNull("network " + connection.getInstanceId() + " with internal position " + connection.getPosition() + " doesn't exist", instance);
+			}
+		} else {
+			XmlInstantiable instance = net.getInstanceByPosition(connection.getPosition());
+			assertNotNull("instance with position " + connection.getPosition() + " doesn't exist", instance);
+		}
 	}
 }

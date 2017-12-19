@@ -27,6 +27,7 @@ import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
 
+import devs_simulator.internals.configuration.xmldefinitions.XmlInstantiable;
 import devs_simulator.internals.configuration.xmldefinitions.XmlNetwork;
 import devs_simulator.internals.configuration.xmldefinitions.XmlProcessor;
 
@@ -121,6 +122,25 @@ public class XmlDefinitions {
 	public XmlNetwork getNetworkById(final String id) {
 		for (XmlNetwork net : networkDefs) {
 			if (id.equals(net.getInstanceId())) {
+				return net;
+			}
+		}
+		return null;
+	}
+
+	/**
+	 * get the instance by type (network, processor, connection point).
+	 * @param type of instance
+	 * @return defined instance
+	 */
+	public XmlInstantiable getInstanceDefByType(final String type) {
+		for (XmlProcessor proc : processorDefs) {
+			if (type.equals(proc.getInstanceType())) {
+				return proc;
+			}
+		}
+		for (XmlNetwork net : networkDefs) {
+			if (type.equals(net.getInstanceType())) {
 				return net;
 			}
 		}

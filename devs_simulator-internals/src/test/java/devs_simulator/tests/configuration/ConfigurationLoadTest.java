@@ -148,6 +148,9 @@ public class ConfigurationLoadTest {
 		outPositions.add("1");
 		TestUtils.validateProcessor("second proc", processors.get(1), "p1", "proc2", inTypes, inPositions, outTypes, outPositions);
 		//TODO: validate wires
+		List<XmlWire> wires = net.getConnections();
+		assertEquals("nr of internal connections", 4, wires.size());
+		TestUtils.validateWiresReferences(wires, net, definitions);
 	}
 	
 	/**

@@ -19,6 +19,7 @@
  */
 package devs_simulator.internals.configuration.xmldefinitions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
@@ -36,6 +37,8 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "network")
 public class XmlNetwork extends XmlInstantiable {
 
+	
+	
 	/** list of input connections */
 	@XmlElementWrapper(name = "inputs")
 	@XmlElement(name = "connectionPoint")
@@ -65,9 +68,13 @@ public class XmlNetwork extends XmlInstantiable {
 	 * 
 	 */
 	public XmlNetwork() {
-		// TODO Auto-generated constructor stub
+		inputConnections = new ArrayList<>();
+		outputConnections = new ArrayList<>();
+		networks = new ArrayList<>();
+		processors = new ArrayList<>();
+		connections = new ArrayList<>();
 	}
-
+	
 	/**
 	 * @return the inputConnections
 	 */
@@ -165,6 +172,26 @@ public class XmlNetwork extends XmlInstantiable {
 		//find in output connection points
 		for (XmlConnectionPoint conn : outputConnections) {
 			if (id.equals(conn.getInstanceId())) {
+				return conn;
+			}
+		}
+		return null;
+	}
+	
+	/**
+	 * get an connection point defined by position.
+	 * @param position of the instance (unique in this network instance as input/output connection point).
+	 * @return the instance.	 */
+	public XmlInstantiable getInstanceByPosition(final String position) {
+		// find in input connection points
+		for (XmlConnectionPoint conn : inputConnections) {
+			if (position.equals(conn.getPosition())) {
+				return conn;
+			}
+		}
+		// find in output connection points
+		for (XmlConnectionPoint conn : outputConnections) {
+			if (position.equals(conn.getPosition())) {
 				return conn;
 			}
 		}

@@ -19,11 +19,11 @@
  */
 package devs_simulator.internals.configuration.xmldefinitions;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import javax.xml.bind.annotation.XmlAccessType;
 import javax.xml.bind.annotation.XmlAccessorType;
-import javax.xml.bind.annotation.XmlAttribute;
 import javax.xml.bind.annotation.XmlElement;
 import javax.xml.bind.annotation.XmlElementWrapper;
 import javax.xml.bind.annotation.XmlRootElement;
@@ -37,10 +37,6 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement(name = "processor")
 public class XmlProcessor extends XmlInstantiable {
 
-	/** already defined type of this processor */
-	@XmlAttribute(name = "type", required = false)
-	private String type;
-		
 	/** list of input connections */
 	@XmlElementWrapper(name = "inputs")
 	@XmlElement(name = "connectionPoint")
@@ -56,25 +52,9 @@ public class XmlProcessor extends XmlInstantiable {
 	 * 
 	 */
 	public XmlProcessor() {
-		// TODO Auto-generated constructor stub
+		inputConnections = new ArrayList<>();
+		outputConnections = new ArrayList<>();
 	}
-
-
-	/**
-	 * @return the type
-	 */
-	public String getType() {
-		return type;
-	}
-
-
-	/**
-	 * @param type the type to set
-	 */
-	public void setType(final String type) {
-		this.type = type;
-	}
-
 
 	/**
 	 * @return the inputConnections
@@ -107,4 +87,23 @@ public class XmlProcessor extends XmlInstantiable {
 		this.outputConnections = outputConnections;
 	}
 
+	/**
+	 * get an connection point defined by position.
+	 * @param position of the instance (unique in this network instance as input/output connection point).
+	 * @return the instance.	 */
+	public XmlInstantiable getInstanceByPosition(final String position) {
+		// find in input connection points
+		for (XmlConnectionPoint conn : inputConnections) {
+			if (position.equals(conn.getPosition())) {
+				return conn;
+			}
+		}
+		// find in output connection points
+		for (XmlConnectionPoint conn : outputConnections) {
+			if (position.equals(conn.getPosition())) {
+				return conn;
+			}
+		}
+		return null;
+	}
 }
