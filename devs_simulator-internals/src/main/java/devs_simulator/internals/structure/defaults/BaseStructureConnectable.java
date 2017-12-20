@@ -24,22 +24,26 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
+
 import devs_simulator.internals.structure.interfaces.IConnectableInstance;
 import devs_simulator.internals.structure.interfaces.IConnectionPoint;
 
 /**
- * Default (Abstract) implementation for BaseConnectable and instance-able Type.
+ * Default (abstract) implementation for BaseConnectable and instance-able Type.
  * This should be inherited by all connect-able instances
  * @author Gabriel Dimitriu
  *
  */
-public class BaseStructureConnectable extends BaseStructureInstanceable implements IConnectableInstance{
+public abstract class BaseStructureConnectable extends BaseStructureInstanceable implements IConnectableInstance {
 	
 	/** input hash map key is position and value is the connection point */
 	private Map<String, IConnectionPoint> inputConnections = new HashMap<>();
 	
 	/** output hash map key is position and value is the connection point */
 	private Map<String, IConnectionPoint> outputConnections = new HashMap<>();
+	
+	/** the network parent of this instance */
+	private Network parentNetwork;
 	
 	/**
 	 * 
@@ -96,5 +100,20 @@ public class BaseStructureConnectable extends BaseStructureInstanceable implemen
 			return outputConnections.get(position);
 		}
 		throw new Exception("position=" + position);
+	}
+	
+	/**
+	 * @return the parent
+	 */
+	@Override
+	public IConnectableInstance getParent() {
+		return parentNetwork;
+	}
+
+	/**
+	 * @param parent the parent to set
+	 */
+	public void setParent(final IConnectableInstance parent) {
+		this.parentNetwork = (Network) parent;
 	}
 }

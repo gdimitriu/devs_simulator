@@ -24,6 +24,6 @@ package devs_simulator.internals.structure.interfaces;
  * @author Gabriel Dimitriu
  *
  */
-public interface IProcessor extends IConnectableAndInstanceable, IRunningInstance{
+public interface IProcessor extends IConnectableInstance, IBaseInstantiableType, IRunningInstance{
 
 }

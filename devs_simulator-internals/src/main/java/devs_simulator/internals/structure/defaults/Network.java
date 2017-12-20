@@ -23,9 +23,10 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Map.Entry;
 
+import devs_simulator.internals.structure.interfaces.IBaseInstantiableType;
 import devs_simulator.internals.structure.interfaces.IClock;
-import devs_simulator.internals.structure.interfaces.IConnectableAndInstanceable;
 import devs_simulator.internals.structure.interfaces.IConnectableInstance;
 import devs_simulator.internals.structure.interfaces.INetwork;
 import devs_simulator.internals.structure.interfaces.IProcessor;
@@ -39,10 +40,10 @@ import devs_simulator.internals.structure.interfaces.IWire;
 public class Network extends BaseStructureConnectable implements INetwork {
 
 	/** map of processing units by id */
-	private Map<String, IConnectableInstance> processorUnits = null;
+	private Map<String, IProcessor> processorUnits = null;
 	
 	/** map of the subnetwork units by id */
-	private Map<String, IConnectableInstance> networkUnits = null;
+	private Map<String, INetwork> networkUnits = null;
 	
 	/** list of connections in this network */
 	private List<IWire> connections = null;
@@ -56,14 +57,43 @@ public class Network extends BaseStructureConnectable implements INetwork {
 		networkUnits = new HashMap<>();
 	}
 	
+	/**
+	 * base constructor for network.
+	 * @param instanceId the instance id
+	 * @param instanceType the type of the instance
+	 */
+	public Network(final String instanceId, final String instanceType) {
+		super(instanceId, instanceType);
+		connections = new ArrayList<>();
+		processorUnits = new HashMap<>();
+		networkUnits = new HashMap<>();
+	}
+
 	@Override
-	public void addConnectable(final IConnectableAndInstanceable instance) throws Exception {
-		if (instance instanceof IProcessor) {
-			processorUnits.put(instance.getInstanceId(), instance);
-		} else if (instance instanceof INetwork) {
-			networkUnits.put(instance.getInstanceId(), instance);
+	public void addConnectable(final IConnectableInstance instance) throws Exception {
+		if (!(instance instanceof IBaseInstantiableType)) {
+			throw new Exception("The instance is not instanceable");
 		}
-		throw new Exception("could not add "  + instance.getInstanceId() + " to the " + getInstanceId());
+		if (instance instanceof IProcessor) {
+			processorUnits.put(((IProcessor) instance).getInstanceId(), (IProcessor) instance);
+			((IProcessor) instance).setParent(this);
+		} else if (instance instanceof INetwork) {
+			networkUnits.put(((INetwork) instance).getInstanceId(), (INetwork) instance);
+			((INetwork) instance).setParent(this);
+		}
+		throw new Exception("could not add "  + ((IBaseInstantiableType) instance).getInstanceId() + " to the " + getInstanceId());
+	}
+	
+	@Override
+	public void addProcessor(final Processor instance) {
+		processorUnits.put(instance.getInstanceId(), instance);
+		instance.setParent(this);
+	}
+	
+	@Override
+	public void addNetwork(final Network instance) {
+		networkUnits.put(instance.getInstanceId(), instance);
+		instance.setParent(this);
 	}
 
 	@Override
@@ -73,15 +103,21 @@ public class Network extends BaseStructureConnectable implements INetwork {
 	}
 
 	@Override
-	public List<IConnectableInstance> getProcessors() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<IProcessor> getProcessors() {
+		List<IProcessor> procs = new ArrayList<>();
+		for(Entry<String, IProcessor> entry : processorUnits.entrySet()) {
+			procs.add(entry.getValue());
+		}
+		return procs;
 	}
 
 	@Override
-	public List<IConnectableInstance> getNetworks() {
-		// TODO Auto-generated method stub
-		return null;
+	public List<INetwork> getNetworks() {
+		List<INetwork> networks = new ArrayList<>();
+		for(Entry<String, INetwork> entry : networkUnits.entrySet()) {
+			networks.add(entry.getValue());
+		}
+		return networks;
 	}
 
 	@Override

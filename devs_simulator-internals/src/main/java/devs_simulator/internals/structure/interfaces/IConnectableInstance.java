@@ -56,6 +56,18 @@ public interface IConnectableInstance {
 	 * @param pad the connection point.
 	 */
 	void addOutputConnectionPoint(final IConnectionPoint pad);
+	
+	/**
+	 * the parent of this one should be a network.
+	 * @return the parent
+	 */
+	public IConnectableInstance getParent();
+	
+	/**
+	 * the parent of this one should be a network.
+	 * @param parent the parent to set
+	 */
+	public void setParent(final IConnectableInstance parent);
 
 	/**
 	 * get the connection point specified by the position (which is the unique id).

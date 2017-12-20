@@ -24,6 +24,7 @@ import org.junit.runners.Suite;
 import org.junit.runners.Suite.SuiteClasses;
 
 import devs_simulator.tests.configuration.ConfigurationLoadTest;
+import devs_simulator.tests.internal.NetworkTests;
 import devs_simulator.tests.internal.ProcessorTests;
 
 /**
@@ -32,7 +33,7 @@ import devs_simulator.tests.internal.ProcessorTests;
  *
  */
 @RunWith(Suite.class)
-@SuiteClasses({ConfigurationLoadTest.class, ProcessorTests.class})
+@SuiteClasses({ConfigurationLoadTest.class, ProcessorTests.class, NetworkTests.class})
 public class AllTests {
 
 }

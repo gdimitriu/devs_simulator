@@ -23,7 +23,7 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.List;
 
-import devs_simulator.internals.structure.defaults.Processor;
+import devs_simulator.internals.structure.defaults.BaseStructureConnectable;
 import devs_simulator.internals.structure.interfaces.IConnectionPoint;
 
 /**
@@ -41,34 +41,6 @@ public final class InternalTestUtils {
 	}
 	
 	/**
-	 * validate the processor internal definition.
-	 * @param message the message to display
-	 * @param processor the processor in internal structure
-	 * @param instanceId the id of the processor
-	 * @param instanceType the type of processor
-	 * @param inTypes the type in input connections
-	 * @param inPositions the positions of input connections
-	 * @param outTypes the type of output connections
-	 * @param outPositions the positions of output connections
-	 * @param inSize the size of input elements
-	 * @param outSize the size of output elements
-	 */
-	public static void validateProcessor(final String message, final Processor processor,
-			final String instanceId, final String instanceType,
-			final List<String> inTypes, final List<String> inPositions,
-			final List<String> outTypes, final List<String> outPositions,
-			final List<Integer> inSize, final List<Integer> outSize) {
-		assertEquals(message + " expected values for input does not agree ", inTypes.size(), inPositions.size());
-		assertEquals(message + " exepcted values for outptus does not agree ", outTypes.size(), outPositions.size());
-		assertEquals(message + " instanceId ", instanceId, processor.getInstanceId());
-		assertEquals(message + " instanceType ", instanceType, processor.getInstanceType());
-		assertEquals(message + " inputs size does not match ", inTypes.size(), processor.getInputConnectionPoints().size());
-		assertEquals(message + " output size does not match ", outTypes.size(), processor.getOutputConnectionPoints().size());
-		validateListOfConnectionPoints(message + " input ", processor.getInputConnectionPoints(), inTypes, inPositions, inSize);
-		validateListOfConnectionPoints(message + " output ", processor.getOutputConnectionPoints(), outTypes, outPositions, outSize);
-	}
-
-	/**
 	 * Validate list of connection points.
 	 * @param message the message to display
 	 * @param connections the list of connection points
@@ -85,5 +57,33 @@ public final class InternalTestUtils {
 			assertEquals("instance position does not match for " + message, positions.get(i), connections.get(i).getPosition());
 			assertEquals("instance size does not match for " + message, sizes.get(i), Integer.valueOf(connections.get(i).getSize()));
 		}
+	}
+	
+	/**
+	 * validate the processor internal definition.
+	 * @param message the message to display
+	 * @param instance the processor/network in internal structure
+	 * @param instanceId the id of the processor
+	 * @param instanceType the type of processor
+	 * @param inTypes the type in input connections
+	 * @param inPositions the positions of input connections
+	 * @param outTypes the type of output connections
+	 * @param outPositions the positions of output connections
+	 * @param inSize the size of input elements
+	 * @param outSize the size of output elements
+	 */
+	public static void validateBaseConnectable(final String message, final BaseStructureConnectable instance,
+			final String instanceId, final String instanceType,
+			final List<String> inTypes, final List<String> inPositions,
+			final List<String> outTypes, final List<String> outPositions,
+			final List<Integer> inSize, final List<Integer> outSize) {
+		assertEquals(message + " expected values for input does not agree ", inTypes.size(), inPositions.size());
+		assertEquals(message + " expected values for outptus does not agree ", outTypes.size(), outPositions.size());
+		assertEquals(message + " instanceId ", instanceId, instance.getInstanceId());
+		assertEquals(message + " instanceType ", instanceType, instance.getInstanceType());
+		assertEquals(message + " inputs size does not match ", inTypes.size(), instance.getInputConnectionPoints().size());
+		assertEquals(message + " output size does not match ", outTypes.size(), instance.getOutputConnectionPoints().size());
+		validateListOfConnectionPoints(message + " input ", instance.getInputConnectionPoints(), inTypes, inPositions, inSize);
+		validateListOfConnectionPoints(message + " output ", instance.getOutputConnectionPoints(), outTypes, outPositions, outSize);
 	}
 }

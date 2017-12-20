@@ -19,7 +19,6 @@
  */
 package devs_simulator.tests.internal;
 
-import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.fail;
 
@@ -36,26 +35,25 @@ import org.junit.Test;
 import devs_simulator.internals.configuration.XmlDefinitions;
 import devs_simulator.internals.configuration.XmlDevsSimulator;
 import devs_simulator.internals.configuration.xmldefinitions.XmlNetwork;
-import devs_simulator.internals.configuration.xmldefinitions.XmlProcessor;
-import devs_simulator.internals.structure.defaults.BaseStructureConnectable;
-import devs_simulator.internals.structure.factory.ProcessorFactory;
-import devs_simulator.internals.structure.interfaces.IProcessor;
+import devs_simulator.internals.structure.defaults.Network;
+import devs_simulator.internals.structure.factory.NetworkFactory;
 
 /**
- * Unitests for processor.
+ * Unitests for the network.
  * @author Gabriel Dimitriu
  *
  */
-public class ProcessorTests {
+public class NetworkTests {
 
 	/** the simulator configuration */
 	private XmlDevsSimulator configSimulator = null;
 	/** the definitions of processors and networks */
 	private XmlDefinitions definitions = null;
+	
 	/**
 	 * 
 	 */
-	public ProcessorTests() {
+	public NetworkTests() {
 		// TODO Auto-generated constructor stub
 	}
 	
@@ -72,36 +70,31 @@ public class ProcessorTests {
 			fail("failed to create configuration : " + e.getLocalizedMessage());
 		}
 	}
-
+	
 	@Test
-	public void createReferencedAndInlineProcessor() {
+	public void validateProcessorsInNetwork() {
 		XmlNetwork net = definitions.getNetworkById("net0");
 		assertNotNull("network with id net0 should exist", net);
-		List<XmlProcessor> xmlProcs = net.getProcessors();
-		ProcessorFactory factory = new ProcessorFactory(definitions);
-		final List<IProcessor> procs = new ArrayList<>();
-		xmlProcs.stream().forEach(xmlProc -> procs.add(factory.createProcessor(xmlProc)));
-		assertEquals("nr of processors should be ", 2, procs.size());
-		validateNet0Procs(procs);
-	}
-
-	/**
-	 * @param procs
-	 */
-	public static void validateNet0Procs(final List<IProcessor> procs) {
+		NetworkFactory factory = new NetworkFactory(definitions);
+		Network network = factory.createNetwork(net);
+		assertNotNull("network with id net0 should be created", network);
 		List<String> inTypes = new ArrayList<>();
+		inTypes.add("input");
 		inTypes.add("input");
 		List<String> inPositions = new ArrayList<>();
 		inPositions.add("0");
+		inPositions.add("1");
 		List<String> outTypes = new ArrayList<>();
 		outTypes.add("output");
+		outTypes.add("output");
 		List<String> outPositions = new ArrayList<>();
-		outPositions.add("1");
+		outPositions.add("2");
+		outPositions.add("3");
 		List<Integer> inSize = new ArrayList<>();
 		inSize.add(1);
-		InternalTestUtils.validateBaseConnectable("first proc", (BaseStructureConnectable) procs.get(0), "p0", "proc1", inTypes, inPositions, outTypes, outPositions, inSize, inSize);
-		inSize.clear();
 		inSize.add(2);
-		InternalTestUtils.validateBaseConnectable("second proc", (BaseStructureConnectable) procs.get(1), "p1", "proc2", inTypes, inPositions, outTypes, outPositions, inSize, inSize);
-	}	
+		InternalTestUtils.validateBaseConnectable("net0", network, "net0", "network", inTypes, inPositions, outTypes, outPositions, inSize, inSize);
+		ProcessorTests.validateNet0Procs(network.getProcessors());
+	}
+
 }
