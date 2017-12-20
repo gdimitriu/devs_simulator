@@ -32,16 +32,16 @@ import devs_simulator.internals.configuration.xmldefinitions.XmlProcessor;
 import devs_simulator.internals.configuration.xmldefinitions.XmlWire;
 
 /**
- * Utils for test validations.
+ * Utils for test validations of xml configurations.
  * @author Gabriel Dimitriu
  *
  */
-public final class TestUtils {
+public final class XmlTestUtils {
 
 	/**
 	 * 
 	 */
-	public TestUtils() {
+	public XmlTestUtils() {
 		// TODO Auto-generated constructor stub
 	}
 
@@ -83,44 +83,49 @@ public final class TestUtils {
 	
 	/**
 	 * Validate list of connection points
-	 * @param message
-	 * @param connections
-	 * @param instancesTypes
-	 * @param positions
+	 * @param message the message to display
+	 * @param connections the list of connection points
+	 * @param instancesTypes the type of the connection points
+	 * @param positions the position of the connection points
+	 * @param sizes the size of each wire
 	 */
 	public static void validateListOfConnectionPoints(final String message, final List<XmlConnectionPoint> connections, 
-			final List<String> instancesTypes, final List<String> positions) {
+			final List<String> instancesTypes, final List<String> positions, final List<Integer> sizes) {
 		assertEquals(message + " expected values does not agree ", instancesTypes.size(), positions.size());
 		assertEquals(message + " the connections does not have the same size as expected ", instancesTypes.size(), connections.size());
 		for (int i = 0; i < connections.size(); i++) {
 			assertEquals("instanceType does not match for " + message, instancesTypes.get(i), connections.get(i).getInstanceType());
 			assertEquals("instance position does not match for " + message, positions.get(i), connections.get(i).getPosition());
+			assertEquals("instance size does not match for " + message, sizes.get(i), Integer.valueOf(connections.get(i).getSize()));
 		}
 	}
 	
 	/**
 	 * validate the processor xml definition.
-	 * @param message
-	 * @param processor
-	 * @param instanceId
-	 * @param instanceType
-	 * @param inTypes
-	 * @param inPositions
-	 * @param outTypes
-	 * @param outPositions
+	 @param message the message to display
+	 * @param processor the processor in xml structure
+	 * @param instanceId the id of the processor
+	 * @param instanceType the type of processor
+	 * @param inTypes the type in input connections
+	 * @param inPositions the positions of input connections
+	 * @param outTypes the type of output connections
+	 * @param outPositions the positions of output connections
+	 * @param inSize the size of input elements
+	 * @param outSize the size of output elements
 	 */
 	public static void validateProcessor(final String message, final XmlProcessor processor,
 			final String instanceId, final String instanceType,
 			final List<String> inTypes, final List<String> inPositions,
-			final List<String> outTypes, final List<String> outPositions) {
+			final List<String> outTypes, final List<String> outPositions,
+			final List<Integer> inSize, final List<Integer> outSize) {
 		assertEquals(message + " expected values for input does not agree ", inTypes.size(), inPositions.size());
 		assertEquals(message + " exepcted values for outptus does not agree ", outTypes.size(), outPositions.size());
 		assertEquals(message + " instanceId ", instanceId, processor.getInstanceId());
 		assertEquals(message + " instanceType ", instanceType, processor.getInstanceType());
 		assertEquals(message + " inputs size does not match ", inTypes.size(), processor.getInputConnections().size());
 		assertEquals(message + " output size does not match ", outTypes.size(), processor.getOutputConnections().size());
-		validateListOfConnectionPoints(message + " input ", processor.getInputConnections(), inTypes, inPositions);
-		validateListOfConnectionPoints(message + " output ", processor.getOutputConnections(), outTypes, outPositions);
+		validateListOfConnectionPoints(message + " input ", processor.getInputConnections(), inTypes, inPositions, inSize);
+		validateListOfConnectionPoints(message + " output ", processor.getOutputConnections(), outTypes, outPositions, outSize);
 	}
 
 	/**

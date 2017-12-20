@@ -37,6 +37,9 @@ public class XmlConnectionPoint extends XmlInstantiable {
 	@XmlElement(name = "position", required = true)
 	private String position;
 	
+	@XmlElement(name ="size", required = false, defaultValue = "1")
+	private int size = 1;
+	
 	/**
 	 * 
 	 */
@@ -56,6 +59,20 @@ public class XmlConnectionPoint extends XmlInstantiable {
 	 */
 	public void setPosition(final String position) {
 		this.position = position;
+	}
+
+	/**
+	 * @return the size
+	 */
+	public int getSize() {
+		return size;
+	}
+
+	/**
+	 * @param size the size to set
+	 */
+	public void setSize(int size) {
+		this.size = size;
 	}
 
 }

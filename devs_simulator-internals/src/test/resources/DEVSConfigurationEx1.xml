@@ -136,6 +136,7 @@
 					<connectionPoint>
 						<instanceType>input</instanceType>
 						<position>1</position>
+						<size>2</size>
 					</connectionPoint>
 				</inputs>
 				<outputs>
@@ -146,6 +147,7 @@
 					<connectionPoint>
 						<instanceType>output</instanceType>
 						<position>3</position>
+						<size>2</size>
 					</connectionPoint>
 				</outputs>
 				<processors>
@@ -160,12 +162,14 @@
 							<connectionPoint>
 								<instanceType>input</instanceType>
 								<position>0</position>
+								<size>2</size>
 							</connectionPoint>
 						</inputs>
 						<outputs>
 							<connectionPoint>
 								<instanceType>output</instanceType>
 								<position>1</position>
+								<size>2</size>
 							</connectionPoint>
 						</outputs>
 					</processor>

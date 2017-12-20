@@ -19,10 +19,11 @@
  */
 package devs_simulator.internals.structure.defaults;
 
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
+import java.util.Map.Entry;
 import devs_simulator.internals.structure.interfaces.IConnectableInstance;
 import devs_simulator.internals.structure.interfaces.IConnectionPoint;
 
@@ -39,6 +40,7 @@ public class BaseStructureConnectable extends BaseStructureInstanceable implemen
 	
 	/** output hash map key is position and value is the connection point */
 	private Map<String, IConnectionPoint> outputConnections = new HashMap<>();
+	
 	/**
 	 * 
 	 */
@@ -57,14 +59,20 @@ public class BaseStructureConnectable extends BaseStructureInstanceable implemen
 
 	@Override
 	public List<IConnectionPoint> getInputConnectionPoints() {
-		// TODO Auto-generated method stub
-		return null;
+		List<IConnectionPoint> connections = new ArrayList<>();
+		for(Entry<String, IConnectionPoint> entry : inputConnections.entrySet()) {
+			connections.add(entry.getValue());
+		}
+		return connections;
 	}
 
 	@Override
 	public List<IConnectionPoint> getOutputConnectionPoints() {
-		// TODO Auto-generated method stub
-		return null;
+		List<IConnectionPoint> connections = new ArrayList<>();
+		for(Entry<String, IConnectionPoint> entry : outputConnections.entrySet()) {
+			connections.add(entry.getValue());
+		}
+		return connections;
 	}
 
 	@Override

@@ -99,7 +99,9 @@ public class ConfigurationLoadTest {
 		outTypes.add("output");
 		List<String> outPositions = new ArrayList<>();
 		outPositions.add("1");
-		TestUtils.validateProcessor("proc definition", processors.get(0), "", "proc1", inTypes, inPositions, outTypes, outPositions);
+		List<Integer> connSize = new ArrayList<>();
+		connSize.add(1);
+		XmlTestUtils.validateProcessor("proc definition", processors.get(0), "", "proc1", inTypes, inPositions, outTypes, outPositions, connSize, connSize);
 	}
 
 	/**
@@ -119,7 +121,10 @@ public class ConfigurationLoadTest {
 		instancesTypes.add("input");
 		positions.add("0");
 		positions.add("1");
-		TestUtils.validateListOfConnectionPoints("inputs", connections, instancesTypes, positions);
+		List<Integer> connSize = new ArrayList<>();
+		connSize.add(1);
+		connSize.add(2);
+		XmlTestUtils.validateListOfConnectionPoints("inputs", connections, instancesTypes, positions, connSize);
 		
 		connections = net.getOutputConnections();
 		instancesTypes.clear();
@@ -127,8 +132,8 @@ public class ConfigurationLoadTest {
 		instancesTypes.add("output");
 		positions.clear();
 		positions.add("2");
-		positions.add("3");
-		TestUtils.validateListOfConnectionPoints("outputs", connections, instancesTypes, positions);
+		positions.add("3");		
+		XmlTestUtils.validateListOfConnectionPoints("outputs", connections, instancesTypes, positions, connSize);
 		
 		List<XmlProcessor> processors = net.getProcessors();
 		assertEquals("nr or proc from master network", 2, processors.size());
@@ -146,11 +151,12 @@ public class ConfigurationLoadTest {
 		outTypes.add("output");
 		List<String> outPositions = new ArrayList<>();
 		outPositions.add("1");
-		TestUtils.validateProcessor("second proc", processors.get(1), "p1", "proc2", inTypes, inPositions, outTypes, outPositions);
-		//TODO: validate wires
+		connSize.clear();
+		connSize.add(2);
+		XmlTestUtils.validateProcessor("second proc", processors.get(1), "p1", "proc2", inTypes, inPositions, outTypes, outPositions, connSize, connSize);
 		List<XmlWire> wires = net.getConnections();
 		assertEquals("nr of internal connections", 4, wires.size());
-		TestUtils.validateWiresReferences(wires, net, definitions);
+		XmlTestUtils.validateWiresReferences(wires, net, definitions);
 	}
 	
 	/**
@@ -202,7 +208,7 @@ public class ConfigurationLoadTest {
 		inPositions.add("0");
 		outInstances.add("net0");
 		outPositions.add("0");
-		TestUtils.validateXMLWire(wires.get(0), inInstances, inPositions, outInstances, outPositions);
+		XmlTestUtils.validateXMLWire(wires.get(0), inInstances, inPositions, outInstances, outPositions);
 		assertNotNull("top level network doesn't exist", configSimulator.getDefinitions().getNetworkById("net0"));
 		inInstances.clear();
 		inInstances.add("es1");
@@ -212,7 +218,7 @@ public class ConfigurationLoadTest {
 		outInstances.add("net0");
 		outPositions.clear();
 		outPositions.add("1");
-		TestUtils.validateXMLWire(wires.get(1), inInstances, inPositions, outInstances, outPositions);
+		XmlTestUtils.validateXMLWire(wires.get(1), inInstances, inPositions, outInstances, outPositions);
 		inInstances.clear();
 		inInstances.add("net0");
 		inPositions.clear();		
@@ -221,7 +227,7 @@ public class ConfigurationLoadTest {
 		outInstances.add("sd0");
 		outPositions.clear();
 		outPositions.add("0");
-		TestUtils.validateXMLWire(wires.get(2), inInstances, inPositions, outInstances, outPositions);
+		XmlTestUtils.validateXMLWire(wires.get(2), inInstances, inPositions, outInstances, outPositions);
 		inInstances.clear();
 		inInstances.add("net0");
 		inPositions.clear();		
@@ -230,6 +236,6 @@ public class ConfigurationLoadTest {
 		outInstances.add("sd1");
 		outPositions.clear();
 		outPositions.add("0");
-		TestUtils.validateXMLWire(wires.get(3), inInstances, inPositions, outInstances, outPositions);
+		XmlTestUtils.validateXMLWire(wires.get(3), inInstances, inPositions, outInstances, outPositions);
 	}
 }

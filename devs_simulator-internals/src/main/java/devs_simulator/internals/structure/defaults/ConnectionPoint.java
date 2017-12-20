@@ -36,6 +36,9 @@ public class ConnectionPoint extends BaseStructureInstanceable implements IRunni
 	
 	/** the owner of this connection point. */
 	private IConnectableInstance owner = null;
+	
+	/** the size of the this connection point */
+	private int size = 1;
 	/**
 	 * 
 	 */
@@ -48,9 +51,10 @@ public class ConnectionPoint extends BaseStructureInstanceable implements IRunni
 	 * @param id 
 	 * @param type
 	 */
-	public ConnectionPoint(final String id, final String type, final String position) {
+	public ConnectionPoint(final String id, final String type, final String position, final int size) {
 		super(id,type);
-		this.position = position; 
+		this.position = position;
+		this.size = size;
 	}
 
 	/**
@@ -81,5 +85,15 @@ public class ConnectionPoint extends BaseStructureInstanceable implements IRunni
 	@Override
 	public void setOwner(final IConnectableInstance owner) {
 		this.owner = owner;
+	}
+	
+	@Override
+	public void setSize(final int size) {
+		this.size = size;
+	}
+	
+	@Override
+	public int getSize() {
+		return this.size;
 	}
 }

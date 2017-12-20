@@ -58,9 +58,9 @@ public class ProcessorFactory {
 		}
 		final Processor proc = new Processor(xmlProcDef.getInstanceId(), realDef.getInstanceType());
 		List<XmlConnectionPoint> pads = realDef.getInputConnections();
-		pads.stream().forEach(pad -> proc.addInputConnectionPoint(new ConnectionPoint(pad.getInstanceId(), pad.getInstanceType(), pad.getPosition())));
+		pads.stream().forEach(pad -> proc.addInputConnectionPoint(new ConnectionPoint(pad.getInstanceId(), pad.getInstanceType(), pad.getPosition(), pad.getSize())));
 		pads = realDef.getOutputConnections();
-		pads.stream().forEach(pad -> proc.addOutputConnectionPoint(new ConnectionPoint(pad.getInstanceId(), pad.getInstanceType(), pad.getPosition())));
+		pads.stream().forEach(pad -> proc.addOutputConnectionPoint(new ConnectionPoint(pad.getInstanceId(), pad.getInstanceType(), pad.getPosition(), pad.getSize())));
 		
 		return proc;
 	}
