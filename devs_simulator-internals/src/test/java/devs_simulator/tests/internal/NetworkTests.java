@@ -76,7 +76,12 @@ public class NetworkTests {
 		XmlNetwork net = definitions.getNetworkById("net0");
 		assertNotNull("network with id net0 should exist", net);
 		NetworkFactory factory = new NetworkFactory(definitions);
-		Network network = factory.createNetwork(net);
+		Network network = null;
+		try {
+			network = factory.createNetwork(net);
+		} catch (Exception e) {
+			fail("exception cought in create network:" + e.getLocalizedMessage());
+		}
 		assertNotNull("network with id net0 should be created", network);
 		List<String> inTypes = new ArrayList<>();
 		inTypes.add("input");

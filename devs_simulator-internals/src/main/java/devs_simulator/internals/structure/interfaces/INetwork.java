@@ -36,10 +36,17 @@ public interface INetwork extends IConnectableInstance, IBaseInstantiableType, I
 	 *  This is not used normally by the system is for future use.
 	 *  The instance could be a network or a processor
 	 *  or something that implement the IConnectableInstance interface.
-	 *  @param instance the instance to be added.
+	 * @param instance the instance to be added.
 	 * @throws Exception if the connectable could not be adedd or wrong type of connectable. 
 	 */
 	void addConnectable(final IConnectableInstance instance) throws Exception;
+	
+	/**
+	 *  get a connect-able instance to the network.
+	 * @param id of instance.
+	 * @return the connect-able instance with the desired Id. 
+	 */
+	IConnectableInstance getConnectableById(final String id);
 	
 	/**
 	 *  add a processor instance to the network.

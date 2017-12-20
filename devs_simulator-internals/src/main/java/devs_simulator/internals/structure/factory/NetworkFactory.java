@@ -22,11 +22,16 @@ package devs_simulator.internals.structure.factory;
 import java.util.List;
 
 import devs_simulator.internals.configuration.XmlDefinitions;
+import devs_simulator.internals.configuration.xmldefinitions.XmlConnection;
 import devs_simulator.internals.configuration.xmldefinitions.XmlConnectionPoint;
 import devs_simulator.internals.configuration.xmldefinitions.XmlNetwork;
 import devs_simulator.internals.configuration.xmldefinitions.XmlProcessor;
+import devs_simulator.internals.configuration.xmldefinitions.XmlWire;
 import devs_simulator.internals.structure.defaults.ConnectionPoint;
 import devs_simulator.internals.structure.defaults.Network;
+import devs_simulator.internals.structure.defaults.Wire;
+import devs_simulator.internals.structure.interfaces.IConnectableInstance;
+import devs_simulator.internals.structure.interfaces.IConnectionPoint;
 
 /**
  * Factory for network instance.
@@ -53,8 +58,9 @@ public class NetworkFactory {
 	 * Create the Network from the xml definition.
 	 * @param xmlNetworkDef the definition of the Network.
 	 * @return the processor as internal structure instance
+	 * @throws Exception 
 	 */
-	public Network createNetwork(final XmlNetwork xmlNetworkDef) {
+	public Network createNetwork(final XmlNetwork xmlNetworkDef) throws Exception {
 		
 		XmlNetwork realDef = xmlNetworkDef;
 		//the processor is referenced from a definition.
@@ -70,7 +76,37 @@ public class NetworkFactory {
 		if (!xmlProcs.isEmpty()) {
 			xmlProcs.stream().forEach(xmlProc -> network.addProcessor((procFactory.createProcessor(xmlProc))));
 		}
+		List<XmlWire> connections = realDef.getConnections();
+		for (XmlWire xmlWire : connections) {
+			addWire(xmlWire, network);
+		}
 		return network;
+	}
+	
+	private void addWire(final XmlWire xmlWire, final Network network) throws Exception {
+		Wire wire = new Wire();
+		List<XmlConnection> connections = xmlWire.getInputs();
+		for (XmlConnection pad : connections) {
+			wire.addInputConnectionPoint(getConnectionPoint(network, pad));
+		}
+		connections = xmlWire.getOutputs();
+		for (XmlConnection pad : connections) {
+			wire.addOutputConnectionPoint(getConnectionPoint(network, pad));
+		}
+		network.addWire(wire);
+	}
+	
+	private IConnectionPoint getConnectionPoint(final Network net, final XmlConnection xmlConnection) throws Exception {
+		//pad from this network
+		if (xmlConnection.getInstanceId() == null || xmlConnection.getInstanceId().isEmpty()) {
+			return net.getConnectionPointByPosition(xmlConnection.getPosition());
+		}
+		//pad from internal instance
+		IConnectableInstance connectable = net.getConnectableById(xmlConnection.getInstanceId());
+		if (connectable != null) {
+			return connectable.getConnectionPointByPosition(xmlConnection.getPosition());
+		}
+		return null;
 	}
 
 }

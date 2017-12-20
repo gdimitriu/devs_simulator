@@ -130,4 +130,15 @@ public class Network extends BaseStructureConnectable implements INetwork {
 		// TODO Auto-generated method stub
 		return null;
 	}
+
+	@Override
+	public IConnectableInstance getConnectableById(final String id) {
+		if (processorUnits.containsKey(id)) {
+			return processorUnits.get(id);
+		}
+		if (networkUnits.containsKey(id)) {
+			return networkUnits.get(id);
+		}
+		return null;
+	}
 }

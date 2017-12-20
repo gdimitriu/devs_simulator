@@ -26,11 +26,29 @@ import java.util.List;
  * @author Gabriel Dimitriu
  *
  */
-public interface IWire {
+public interface IWire extends IRunningInstance {
 	
-	/** get the input connection points */
+	/**
+	 * get the input connection points.
+	 * @return list of input connection points.
+	 */
 	List<IConnectionPoint> getInputConnectionPoints();
 	
-	/** get the output connection points */
+	/** 
+	 * get the output connection points.
+	 * @return list of output connection points.
+	 */
 	List<IConnectionPoint> getOutputConnectionPoints();
+	
+	/**
+	 * Add an input connection point as last connection.
+	 * @param connection the connection to be added.
+	 */
+	void addInputConnectionPoint(final IConnectionPoint connection);
+	
+	/**
+	 * Add an output connection point as last connection.
+	 * @param connection the connection to be added.
+	 */
+	void addOutputConnectionPoint(final IConnectionPoint connection);
 }
